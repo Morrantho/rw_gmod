@@ -4,7 +4,7 @@
 ## Server
 
 <details>
-  <summary>gcord.addWebhook( string name, string chanID, string key )</summary>
+  <summary>void gcord.addWebhook( string name, string chanID, string key )</summary>
   
   ```lua
   gcord.addWebhook( string name, string chanID, string key )
@@ -42,7 +42,7 @@
 </details>
 
 <details>
-  <summary>gcord.queryWebhook( string webhookName, table content )</summary>
+  <summary>void gcord.queryWebhook( string webhookName, table content )</summary>
   
   ```lua
   gcord.queryWebhook( string webhookName, table content )
