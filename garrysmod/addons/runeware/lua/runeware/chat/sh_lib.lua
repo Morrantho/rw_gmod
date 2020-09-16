@@ -1,0 +1,9 @@
+rwchat=rwchat||{};
+rwchat.dbg=rwchat.dbg||false;
+rwchat.enabled=rwchat.enabled||false;
+rwchat.enums=
+{
+    string=0,
+    color=1
+};
+rwchat.enums.count=table.Count(rwchat.enums);

@@ -1,0 +1,21 @@
+if !db.enabled then return; end
+local reg=db.register;
+reg("additem","call additem(?,?,?,?,?,?,?)");
+reg("addperk","call addperk(?,?,?)");
+reg("addplayer","call addplayer(?,?,?,?)");
+reg("banplayer","call banplayer(?,?,?,?)");
+reg("getinventory","call getinventory(?)");
+reg("getname","call getname(?)");
+reg("getperks","call getperks(?)");
+reg("getplayer","call getplayer(?)");
+reg("isbanned","call isbanned(?)");
+reg("removeitem","call removeitem(?,?)");
+reg("setlevel","call setlevel(?,?)");
+reg("setmoney","call setmoney(?,?)");
+reg("setname","call setname(?,?)");
+reg("setperkpoints","call setperkpoints(?,?)");
+reg("setrole","call setrole(?,?)");
+reg("setxp","call setxp(?,?)");
+reg("unbanplayer","call unbanplayer(?)");
+reg("updateperk","call updateperk(?,?,?)");
+reg("updatequantity","call updatequantity(?,?,?,?)");
