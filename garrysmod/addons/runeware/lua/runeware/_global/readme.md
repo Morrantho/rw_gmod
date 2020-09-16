@@ -2,10 +2,10 @@
 ## Shared
 
 <details>
-  <summary>choose(cond,a,b)</summary>
+  <summary>Any choose(cond,a,b)</summary>
   
   ```lua
-  choose(cond,a,b)
+  Any choose(cond,a,b)
   ```
   ### Description:
   * Returns a if cond is true, else returns b.
@@ -24,6 +24,115 @@
 
   ```lua
   str="No"
+  ```
+</details>
+
+<details>
+  <summary>Player findplayer(arg)</summary>
+  
+  ```lua
+  Player findplayer(arg)
+  ```
+  ### Description:
+  * Accepts a steamid or player name and returns a Player.
+  ### Args:
+  * arg
+    * A player name or steamid.
+  ### Example:
+  ```lua
+  local pyg=findplayer("STEAM_0:0:18578874");
+  local legacy=findplayer("Legacy The Duck");
+  ```
+  ### Output:
+  ```lua
+  pyg=Player[1]
+  legacy=Player[2]
+  ```
+</details>
+
+<details>
+  <summary>Number tobits(n)</summary>
+  
+  ```lua
+  Number tobits(n)
+  ```
+  ### Description:
+  * Accepts an Integer and returns the number of bits it contains.
+  ### Args:
+  * n
+    * The number whose bits you wish to count.
+  ### Example:
+  ```lua
+  local some_num=tobits(1234);
+  ```
+  ### Output:
+  ```lua
+  some_num=11;
+  ```
+</details>
+
+
+<details>
+  <summary>Void logtable(Table t)</summary>
+  
+  ```lua
+  Void logtable(Table t)
+  ```
+  ### Description:
+  * Accepts a table and prints all of its indices, keys, and values recursively.
+  ### Args:
+  * Table t
+    * The table you wish to display.
+  ### Example:
+  ```lua
+  local my_table=
+  {
+    name="hello",
+    1234,
+    {
+      x=123,
+      y=234
+    }
+  };
+  
+  logtable(my_table);
+  ```
+  ### Output:
+  ```lua
+  {
+    name = "hello",
+    1 = 1234,
+    2 =
+    {
+      x = 123,
+      y = 234
+    }
+  }
+  ```
+</details>
+
+<details>
+  <summary>Number bop(String str)</summary>
+  
+  ```lua
+  Number bop(String str)
+  ```
+  ### Description:
+  * Performs C style bit operations on the input string.
+  ### Args:
+  * String s
+    * The input string containing bit operations you wish to perform.
+  ### Example:
+  ```lua
+  print(bop("1 << 2"));
+  print(bop("10 >> 1"));
+  print(bop("10&8"));
+  ```
+  ### Output:
+  ```lua
+  4
+  5
+  8
   ```
 </details>
 
