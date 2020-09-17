@@ -1,6 +1,5 @@
 # _global
 ## Shared
-
 <details>
   <summary>Any choose(cond,a,b)</summary>
   
@@ -13,9 +12,9 @@
   * cond
     * The conditional you wish to evaluate.
   * a
-    * The value returned is cond is true.
+    * The value returned if cond is true.
   * b
-    * The value returned is cond is false.
+    * The value returned if cond is false.
   ### Example:
   ```lua
   local str=choose(5>10,"Yes","No");
@@ -42,11 +41,13 @@
   ```lua
   local pyg=findplayer("STEAM_0:0:18578874");
   local legacy=findplayer("Legacy The Duck");
+  print(pyg);
+  print(legacy);
   ```
   ### Output:
   ```lua
-  pyg=Player[1]
-  legacy=Player[2]
+  Player[1] pyg
+  Player[2] legacy
   ```
 </details>
 
@@ -64,10 +65,11 @@
   ### Example:
   ```lua
   local some_num=tobits(1234);
+  print(some_num);
   ```
   ### Output:
   ```lua
-  some_num=11;
+  11
   ```
 </details>
 
