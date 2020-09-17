@@ -138,4 +138,86 @@
 
 ## Server
 
+<details>
+  <summary>Void success(String msg,Table/Player to)</summary>
+  
+  ```lua
+  Void success(String msg,Table/Player to)
+  ```
+  ### Description:
+  * Sends the message "msg" as a notification.addlegacy to "to".
+  ### Args:
+  * msg
+    * The message you wish "to" to receive.
+  * to
+    * One player or a table of players that will receive your message.
+  ### Example:
+  ```lua
+  success("Hello");
+  ```
+  ### Output:
+  ![output](https://media.discordapp.net/attachments/638535791676620810/755939698211291136/unknown.png)
+</details>
+
+
+<details>
+  <summary>Void err(String msg,Table/Player to)</summary>
+  
+  ```lua
+  Void err(String msg,Table/Player to)
+  ```
+  ### Description:
+  * Sends the error message "msg" as a notification.addlegacy to "to".
+  ### Args:
+  * msg
+    * The message you wish "to" to receive.  
+  * to
+    * One player or a table of players that will receive your message.
+  ### Example:
+  ```lua
+  err("I'm an error.");
+  ```
+  ### Output:
+  ![output](https://media.discordapp.net/attachments/638535791676620810/755940456826798120/unknown.png)
+</details>
+
 ## Client
+
+<details>
+  <summary>Void success(String msg)</summary>
+  
+  ```lua
+  Void success(String msg)
+  ```
+  ### Description:
+  * Sends the message "msg" as a notification.addlegacy to the localplayer.
+  ### Args:
+  * msg
+    * The message the localplayer will receive.
+  ### Example:
+  ```lua
+  success("Hello");
+  ```
+  ### Output:
+  ![output](https://media.discordapp.net/attachments/638535791676620810/755939698211291136/unknown.png)
+</details>
+
+
+<details>
+  <summary>Void err(String msg)</summary>
+  
+  ```lua
+  Void err(String msg)
+  ```
+  ### Description:
+  * Sends the error message "msg" as a notification.addlegacy to the localplayer.
+  ### Args:
+  * msg
+    * The error message the localplayer will receive.
+  ### Example:
+  ```lua
+  err("I'm an error.");
+  ```
+  ### Output:
+  ![output](https://media.discordapp.net/attachments/638535791676620810/755940456826798120/unknown.png)
+</details>
