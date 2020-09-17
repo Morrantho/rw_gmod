@@ -1,10 +1,10 @@
 # _global
 ## Shared
 <details>
-  <summary>Any choose(cond,a,b)</summary>
+  <summary>Any choose(Bool cond,Any a,Any b)</summary>
   
   ```lua
-  Any choose(cond,a,b)
+  Any choose(Bool cond,Any a,Any b)
   ```
   ### Description:
   * Returns a if cond is true, else returns b.
@@ -28,10 +28,10 @@
 </details>
 
 <details>
-  <summary>Player findplayer(arg)</summary>
+  <summary>Player findplayer(String arg)</summary>
   
   ```lua
-  Player findplayer(arg)
+  Player findplayer(String arg)
   ```
   ### Description:
   * Accepts a steamid or player name and returns a Player.
@@ -53,10 +53,10 @@
 </details>
 
 <details>
-  <summary>Number tobits(n)</summary>
+  <summary>Number tobits(Number n)</summary>
   
   ```lua
-  Number tobits(n)
+  Number tobits(Number n)
   ```
   ### Description:
   * Accepts an Integer and returns the number of bits it contains.
