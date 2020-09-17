@@ -18,11 +18,12 @@
   ### Example:
   ```lua
   local str=choose(5>10,"Yes","No");
+  print(str);
   ```
   ### Output:
 
   ```lua
-  str="No"
+  "No"
   ```
 </details>
 
