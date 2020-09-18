@@ -1,4 +1,5 @@
 if !admin.enabled then return; end
+local hookadd=hook.Add;
 local clamp = math.Clamp;
 toolrestraints = {};
 
@@ -131,4 +132,4 @@ function admin.CanTool(pl,tr,tool)
 	end
 	return true;
 end
-hook.Add("CanTool","admin.CanTool",admin.CanTool);
+hookadd("CanTool","admin.CanTool",admin.CanTool);
