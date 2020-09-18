@@ -1,0 +1,17 @@
+/*
+!/.gitignore
+
+!/garrysmod
+/garrysmod/*
+
+!/garrysmod/gamemodes
+/garrysmod/gamemodes/*
+!/garrysmod/gamemodes/rw
+
+!/garrysmod/addons
+/garrysmod/addons/*
+!/garrysmod/addons/runeware
+
+!/garrysmod/lua
+/garrysmod/lua/*
+!/garrysmod/lua/bin
