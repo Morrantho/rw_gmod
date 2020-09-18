@@ -17,11 +17,12 @@ CMD.enabled     = false;
 local _ang=ang(0,0,0);
 local _mins=vec(-8,-8,-8);
 local _maxs=vec(8,8,8);
-local _col=getcol("whitest");
+local _col=nil;
 local _cvars={};
 local _pnl=nil;
 
 local function render_wirebox()
+	if !_col then _col=getcol("whitest"); end
 	local pos=vec(_cvars[1]:GetInt(),_cvars[2]:GetInt(),_cvars[3]:GetInt());
 	local mins=vec(_cvars[4]:GetInt(),_cvars[5]:GetInt(),_cvars[6]:GetInt());
 	local maxs=vec(_cvars[7]:GetInt(),_cvars[8]:GetInt(),_cvars[9]:GetInt());

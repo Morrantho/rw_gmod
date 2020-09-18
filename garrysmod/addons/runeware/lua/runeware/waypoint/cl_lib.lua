@@ -8,7 +8,7 @@ local camend=cam.End3D2D;
 function waypoint.draw2d()
 	local pl=LocalPlayer();
 	local plpos=pl:GetPos();
-	local waypoints=cache.get("waypoints",pl)||{};
+	local waypoints=cache.get(pl,"waypoints")||{};
 	for title,wpos in pairs(waypoints) do
 		-- idk why this code keeps vanishing, but what was here was ancient.
 	end
@@ -17,7 +17,7 @@ hookadd("HUDPaint","waypoint.draw2d",waypoint.draw2d);
 
 function waypoint.draw3d()
 	local pl=LocalPlayer();
-	local waypoints=cache.get("waypoints",pl)||{};
+	local waypoints=cache.get(pl,"waypoints")||{};
 	for title,wpos in pairs(waypoints) do
 		-- idk why this code keeps vanishing, but what was here was ancient.
 	end
