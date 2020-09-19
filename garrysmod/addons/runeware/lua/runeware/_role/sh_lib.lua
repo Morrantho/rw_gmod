@@ -4,10 +4,11 @@ local pl=findmeta("Entity");
 -- sh lib
 -------------------------------------------------------------------------------
 role=role||{};
-role.enabled=role.enabled||true;
-role.dbg=role.dbg||false;
+role.enabled=true;
+role.dbg=false;
 role.bits=role.bits||1;
 if !role.enabled then return; end
+
 function role.add(name)
 	local id=role[name];
 	if !id then id=#role+1; end
