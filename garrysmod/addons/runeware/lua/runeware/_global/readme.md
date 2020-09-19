@@ -1,226 +1,332 @@
+<!---------------------------------------------------------------------------->
+<!--_global-->
+<!---------------------------------------------------------------------------->
 # _global
-## Shared
+<!------------------------------------------------------------------>
+<!--Shared-->
+<!------------------------------------------------------------------>
 <details>
-  <summary>Any choose(Bool cond,Any a,Any b)</summary>
-  
-  ```lua
-  Any choose(Bool cond,Any a,Any b)
-  ```
-  ### Description:
-  * Returns a if cond is true, else returns b.
-  ### Args:
-  * cond
-    * The conditional you wish to evaluate.
-  * a
-    * The value returned if cond is true.
-  * b
-    * The value returned if cond is false.
-  ### Example:
-  ```lua
-  local str=choose(5>10,"Yes","No");
-  print(str);
-  ```
-  ### Output:
-
-  ```lua
-  "No"
-  ```
-</details>
-
+<summary>Shared</summary>
+<!-------------------------------------------------------->
+<!--Shared Lib-->
+<!-------------------------------------------------------->
 <details>
-  <summary>Player findplayer(String arg)</summary>
-  
-  ```lua
-  Player findplayer(String arg)
-  ```
-  ### Description:
-  * Accepts a steamid or player name and returns a Player.
-  ### Args:
-  * arg
-    * A player name or steamid.
-  ### Example:
-  ```lua
-  local pyg=findplayer("STEAM_0:0:18578874");
-  local legacy=findplayer("Legacy The Duck");
-  print(pyg);
-  print(legacy);
-  ```
-  ### Output:
-  ```lua
-  Player[1] pyg
-  Player[2] legacy
-  ```
-</details>
-
+<summary>Lib</summary>
+<!---------------------------------------------->
+<!--choose-->
+<!---------------------------------------------->
 <details>
-  <summary>Number tobits(Number n)</summary>
-  
-  ```lua
-  Number tobits(Number n)
-  ```
-  ### Description:
-  * Accepts an Integer and returns the number of bits it contains.
-  ### Args:
-  * n
-    * The number whose bits you wish to count.
-  ### Example:
-  ```lua
-  local some_num=tobits(1234);
-  print(some_num);
-  ```
-  ### Output:
-  ```lua
-  11
-  ```
-</details>
+<summary>
 
+```lua
+any choose(bool cond,any a,any b);
+```
+</summary>
+Description:
 
++ Returns a if cond is true, else returns b.
+
+Args:
++ bool cond
+	+ The conditional you wish to evaluate.
++ any a
+	+ The value returned if cond is true.
++ any b
+	+ The value returned if cond is false.
+
+Example:
+```lua
+print(choose(5>10,"Yes","No"));
+```
+Output:
+```lua
+No
+```
+</details><!--end choose()-->
+<!---------------------------------------------->
+<!--findplayer-->
+<!---------------------------------------------->
 <details>
-  <summary>Void logtable(Table t)</summary>
-  
-  ```lua
-  Void logtable(Table t)
-  ```
-  ### Description:
-  * Accepts a table and prints all of its indices, keys, and values recursively.
-  ### Args:
-  * Table t
-    * The table you wish to display.
-  ### Example:
-  ```lua
-  local my_table=
-  {
-    name="hello",
-    1234,
-    {
-      x=123,
-      y=234
-    }
-  };
-  
-  logtable(my_table);
-  ```
-  ### Output:
-  ```lua
-  {
-    name = "hello",
-    1 = 1234,
-    2 =
-    {
-      x = 123,
-      y = 234
-    }
-  }
-  ```
-</details>
+<summary>
 
+```lua
+Player findplayer(string arg);
+```
+</summary>
+Description:
+
++ Accepts a SteamID or player name and returns a Player or nil if not found.
+
+Args:
++ string arg
+	+ A player name or SteamID.
+
+Example:
+```lua
+print(findplayer("STEAM_0:0:18578874"));
+print(findplayer("Legacy The Duck"));
+```
+Output:
+```lua
+Player[1] pyg
+Player[2] legacy the duck
+```
+</details><!--end findplayer()-->
+<!---------------------------------------------->
+<!--tobits-->
+<!---------------------------------------------->
 <details>
-  <summary>Number bop(String str)</summary>
-  
-  ```lua
-  Number bop(String str)
-  ```
-  ### Description:
-  * Performs C style bit operations on the input string.
-  ### Args:
-  * String s
-    * The input string containing bit operations you wish to perform.
-  ### Example:
-  ```lua
-  print(bop("1 << 2"));
-  print(bop("10 >> 1"));
-  print(bop("10&8"));
-  ```
-  ### Output:
-  ```lua
-  4
-  5
-  8
-  ```
-</details>
+<summary>
 
-## Server
+```lua
+number tobits(number n)
+```
+</summary>
+Description:
 
++ Accepts an unsigned integer and returns the number of bits it contains.
+
+Args:
++ number n
+	+ The unsigned integer whose bits you wish to count.
+
+Example:
+```lua
+print(tobits(1234));
+```
+Output:
+```lua
+11
+```
+</details><!--end tobits()-->
+<!---------------------------------------------->
+<!--logtable-->
+<!---------------------------------------------->
 <details>
-  <summary>Void success(String msg,Table/Player to)</summary>
-  
-  ```lua
-  Void success(String msg,Table/Player to)
-  ```
-  ### Description:
-  * Sends the message "msg" as a notification.addlegacy to "to".
-  ### Args:
-  * msg
-    * The message you wish "to" to receive.
-  * to
-    * One player or a table of players that will receive your message.
-  ### Example:
-  ```lua
-  success("Hello");
-  ```
-  ### Output:
-  ![output](https://media.discordapp.net/attachments/638535791676620810/755939698211291136/unknown.png)
-</details>
+<summary>
 
+```lua
+void logtable(table t)
+```
+</summary>
+Description:
 
++ Accepts a table and prints all of its indices, keys, and values recursively.
+
+Args:
++ table t
+	+ The table you wish to display.
+
+Example:
+```lua
+local my_table=
+{
+	name="hello",
+	1234,
+	{
+		x=123,
+		y=234
+	}
+};
+logtable(my_table);
+```
+Output:
+```lua
+{
+	name = "hello",
+	1 = 1234,
+	2 =
+	{
+		x = 123,
+		y = 234
+	}
+}
+```
+</details><!--end logtable()-->
+<!---------------------------------------------->
+<!--bop-->
+<!---------------------------------------------->
 <details>
-  <summary>Void err(String msg,Table/Player to)</summary>
-  
-  ```lua
-  Void err(String msg,Table/Player to)
-  ```
-  ### Description:
-  * Sends the error message "msg" as a notification.addlegacy to "to".
-  ### Args:
-  * msg
-    * The message you wish "to" to receive.  
-  * to
-    * One player or a table of players that will receive your message.
-  ### Example:
-  ```lua
-  err("I'm an error.");
-  ```
-  ### Output:
-  ![output](https://media.discordapp.net/attachments/638535791676620810/755940456826798120/unknown.png)
-</details>
+<summary>
 
-## Client
+```lua
+number bop(string str)
+```
+</summary>
+Description:
 
++ Performs C style bit operations on the input string.
+
+Args:
++ string str
+	+ The input string containing bit operations you wish to perform.
+
+Example:
+```lua
+print(bop("1 << 2"));
+print(bop("10 >> 1"));
+print(bop("10&8"));
+```
+Output:
+```lua
+4
+5
+8
+```
+</details><!--end bop()-->
+</details><!--end shared lib-->
+</details><!--end shared-->
+<!------------------------------------------------------------------>
+<!--Server-->
+<!------------------------------------------------------------------>
 <details>
-  <summary>Void success(String msg)</summary>
-  
-  ```lua
-  Void success(String msg)
-  ```
-  ### Description:
-  * Sends the message "msg" as a notification.addlegacy to the localplayer.
-  ### Args:
-  * msg
-    * The message the localplayer will receive.
-  ### Example:
-  ```lua
-  success("Hello");
-  ```
-  ### Output:
-  ![output](https://media.discordapp.net/attachments/638535791676620810/755939698211291136/unknown.png)
-</details>
-
-
+<summary>Server</summary>
+<!-------------------------------------------------------->
+<!--Server Lib-->
+<!-------------------------------------------------------->
 <details>
-  <summary>Void err(String msg)</summary>
-  
-  ```lua
-  Void err(String msg)
-  ```
-  ### Description:
-  * Sends the error message "msg" as a notification.addlegacy to the localplayer.
-  ### Args:
-  * msg
-    * The error message the localplayer will receive.
-  ### Example:
-  ```lua
-  err("I'm an error.");
-  ```
-  ### Output:
-  ![output](https://media.discordapp.net/attachments/638535791676620810/755940456826798120/unknown.png)
-</details>
+<summary>Lib</summary>
+<!---------------------------------------------->
+<!--success-->
+<!---------------------------------------------->
+<details>
+<summary>
+
+```lua
+void success(string txt,table/Player to)
+```
+</summary>
+Description:
+
++ Sends a net message (txt) to a table of players or a single player (to), displaying it as a success via notification.addlegacy() once received.
+
+Args:
++ string txt
+	+ The message to send.
++ table/Player to
+	+ Who we're sending it to.
+
+Example:
+```lua
+success("Something good happened!",findplayer("pyg"));
+```
+</details><!--end success()-->
+<!---------------------------------------------->
+<!--err-->
+<!---------------------------------------------->
+<details>
+<summary>
+
+```lua
+void err(string txt,table/Player to);
+```
+</summary>
+Description:
+
++ Sends a net message (txt) to a table of players or a single player (to), displaying it as an error via notification.addlegacy() once received.
+
+Args:
++ string txt
+	+ The message to send.
++ table/Player to
+	+ Who we're sending it to.
+
+Example:
+```lua
+err("Something bad happened!",findplayer("pyg"));
+```
+</details><!--end err()-->
+</details><!--end server lib-->
+</details><!--end server-->
+<!------------------------------------------------------------------>
+<!--Client-->
+<!------------------------------------------------------------------>
+<details>
+<summary>Client</summary>
+<!-------------------------------------------------------->
+<!--Client Lib-->
+<!-------------------------------------------------------->
+<details>
+<summary>Lib</summary>
+<!---------------------------------------------->
+<!--success-->
+<!---------------------------------------------->
+<details>
+<summary>
+
+```lua
+void success(string txt)
+```
+</summary>
+Description:
+
++ Displays the string (txt) as a success message via notification.addlegacy() to the local player.
+
+Args:
++ string txt
+	+ The success message to display.
+
+Example:
+```lua
+success("Something good happened!");
+```
+</details><!--End success-->
+<!---------------------------------------------->
+<!--err-->
+<!---------------------------------------------->
+<details>
+<summary>
+
+```lua
+void err(string txt);
+```
+</summary>
+Description:
+
++ Displays the string (txt) as an error message via notification.addlegacy() to the local player.
+
+Args:
++ string txt
+	+ The error message to display.
+
+Example:
+```lua
+err("Something bad happened!");
+```
+</details><!--end err-->
+</details><!--end client lib-->
+<details>
+<summary>Callbacks</summary>
+<!-------------------------------------------------------->
+<!--Client Callbacks-->
+<!-------------------------------------------------------->
+<!---------------------------------------------->
+<!--onsuccess-->
+<!---------------------------------------------->
+<details>
+<summary>
+
+```lua
+void onsuccess();
+```
+</summary>
+Description:
+
++ Reads the string sent from the server via server success(), then calls client success().
+</details><!--end onsuccess-->
+<!---------------------------------------------->
+<!--onerr-->
+<!---------------------------------------------->
+<details>
+<summary>
+
+```lua
+void onerr();
+```
+</summary>
+Description:
+
++ Reads the string sent from the server via server err(), then calls client err().
+</details><!--end onerr-->
+</details><!--end client callback-->
+</details><!--end client-->
