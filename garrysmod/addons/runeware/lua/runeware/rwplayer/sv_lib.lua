@@ -32,10 +32,23 @@ function rwplayer.playerspawn(pl)
 end
 hookadd("PlayerSpawn","rwplayer.playerspawn",rwplayer.playerspawn);
 
+function rwplayer.scaleplayerdamage( pl, hit, dmg )
+
+	local inf,att = dmg:GetInflictor(), dmg:GetAttacker()
+
+	if ( att:IsPlayer() || att:IsNPC() ) && !status.hasstatus( pl, "ghosted" ) && ( !pl.LastHit || pl.LastHit < CurTime() ) then
+		pl.LastHit = CurTime() + 2
+		pl:doHurtSound( hit )
+	end
+
+end
+hookadd( "ScalePlayerDamage", "rwplayer.scaleplayerdamage", rwplayer.scaleplayerdamage )
+
 function rwplayer.playerdeath( pl, inf, atk )
 	pl:SetViewOffset(vec(0,0,64));
 	pl:SetViewOffsetDucked(vec(0,0,28));
 	pl:addstatus("ghosted");
+	pl:doHurtSound( nil, true )
 
 	if atk:IsWorld() || inf:GetClass() == "rpg_missile" || inf:GetClass() == "npc_grenade_frag" || math.random() < 0.01 then
 		for i = 1, #player.GetHumans() do
