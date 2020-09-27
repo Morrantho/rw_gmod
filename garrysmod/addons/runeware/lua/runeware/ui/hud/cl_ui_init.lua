@@ -16,4 +16,4 @@ end
 
 hud = hud or {} 
 
-hook.Add("InitPostEntity", "startup", init)
+--hook.Add("InitPostEntity", "startup", init)

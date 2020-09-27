@@ -1,4 +1,9 @@
 if !ui.enabled then return; end
+local setcol=surface.SetDrawColor;
+local getcol=color.get;
+local rect=surface.DrawRect;
+local olrect=surface.DrawOutlinedRect;
+
 local panel = {};
 
 function panel:Init()
@@ -15,15 +20,27 @@ function panel:Init()
 	self.nav = vgui.Create("cl_dpanel",self);
 	self.nav:Dock(TOP);
 	self.nav:SetTall(scrh/32);
+	self.nav.Paint=function(s,w,h)
+		surface.SetDrawColor(color.get("green"));
+		surface.DrawRect(0,0,w,h);
+	end
 
 	self.title = vgui.Create("cl_dbutton",self.nav);
 	self.title:Dock(LEFT);
 	self.title:SetText("Runeware");
+	self.title.Paint=nil;
 
 	self.close = vgui.Create("cl_dbutton",self.nav);
 	self.close:Dock(RIGHT);
 	self.close:SetWide(self.nav:GetTall());
 	self.close:SetText("x");
+	self.close.Paint=function(s,w,h)
+		if s:IsHovered() then
+			s:SetTextColor(color.get("green"));
+		else
+			s:SetTextColor(color.get("whitest"));
+		end
+	end
 	self.close.DoClick = function()
 		self:Close();
 	end
@@ -34,10 +51,9 @@ function panel:Think()
 end
 
 function panel:Paint(w,h)
-	surface.SetDrawColor(color.get("black"));
-	surface.DrawRect(0,0,w,h);
-
-	surface.SetDrawColor(color.get("blacker"));
-	surface.DrawOutlinedRect(0,0,w,h);
+	setcol(getcol("blackest"));
+	rect(0,0,w,h);
+	setcol(getcol("blacker"));
+	olrect(0,0,w,h);
 end
 ui.add("cl_dframe",panel,"DFrame");

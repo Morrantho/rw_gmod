@@ -12,16 +12,25 @@ function panel:Init()
 	self:SetTextColor(getcolor("whitest"));
 	self:Center();
 	self:SetTall(ScrH()/32);
+	self.active=false;
 end
 
 function panel:Paint(w,h)
 	if self:IsHovered() then
-		setcolor(getcolor("white"));
+		setcolor(getcolor("black"));
+		self:SetTextColor(getcolor("green"));
 	else
-		setcolor(getcolor("blackest"));
+		setcolor(getcolor("blackerer"));
+		self:SetTextColor(getcolor("whitest"));
+	end
+	if self.active then
+		setcolor(getcolor("green"));
+	end
+	if self.active&&self:IsHovered() then
+		self:SetTextColor(getcolor("whitest"));
 	end
 	drawrect(0,0,w,h);
-	setcolor(getcolor("blackest"));
+	setcolor(getcolor("blacker"));
 	drawoutlinedrect(0,0,w,h);
 end
 ui.add("cl_dbutton",panel,"DButton");
