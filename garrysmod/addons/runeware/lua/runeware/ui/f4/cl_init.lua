@@ -12,13 +12,17 @@ function panel:Init()
 end
 
 function panel:mkpages()
-	self.body:addpage("materials/f4/shop.png","Shop","cl_dbutton");
 	self.body:addpage("materials/f4/jobs.png","Jobs","cl_dbutton");
+	self.body:addpage("materials/f4/shop.png","Shop","cl_dbutton");
 	self.body:addpage("materials/f4/inventory.png","Inventory","cl_dbutton");
-	self.body:addpage("materials/f4/perks.png","Perks","cl_dbutton");
 	self.body:addpage("materials/f4/crafting.png","Crafting","cl_dbutton");
+	self.body:addpage("materials/f4/perks.png","Perks","cl_dbutton");
+	self.body:addpage("materials/f4/laws.png","Laws","cl_dbutton");
+	self.body:addpage("materials/f4/agendas.png","Agendas","cl_dbutton");
 	self.body:addpage("materials/f4/settings.png","Settings","cl_dbutton");
 	self.body:addpage("materials/f4/rules.png","Rules","cl_dbutton");
+	self.body:addpage("materials/f4/donate.png","Donate","cl_dbutton");
+	self.body:addpage("materials/f4/steam.png","Steam","cl_dbutton");
 	self.body:mkpages();
 end
 ui.add("cl_f4",panel,"cl_dframe");

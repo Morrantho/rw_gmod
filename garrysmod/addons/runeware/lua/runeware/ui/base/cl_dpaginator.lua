@@ -53,7 +53,9 @@ function panel:Init()
 	if self.dbg then self:dodbg(); end
 end
 
-function panel:Paint(s,w,h) end
+function panel:Paint(s,w,h)
+	
+end
 
 function panel:dodbg()
 	self.btnsperpage=8;
