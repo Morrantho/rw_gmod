@@ -32,3 +32,12 @@ function pl:SteamID()
 	if !IsValid(self)&&self:EntIndex()==0 then return "CONSOLE"; end
 	return pl._SteamID(self);
 end
+
+function pl:israiding()
+	return cache.get(self,"raiding")
+end
+
+function pl:withinbounds( ent, dist )
+	if !ent then return false end
+	return self:GetPos():DistToSqr( ent:GetPos() ) < ( dist * dist )
+end

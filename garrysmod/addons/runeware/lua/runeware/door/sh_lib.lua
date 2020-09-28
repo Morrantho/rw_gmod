@@ -3,8 +3,8 @@ local keys=table.GetKeys;
 local plyall=player.GetAll;
 local push=table.insert;
 door=door||{};
-door.dbg=true;
-door.enabled=true;
+door.dbg=false;
+door.enabled=door.enabled||true;
 if !door.enabled then return; end
 door.groups=door.groups||{};
 door.doors=door.doors||{};

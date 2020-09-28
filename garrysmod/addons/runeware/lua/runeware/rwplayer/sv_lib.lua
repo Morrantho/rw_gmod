@@ -3,6 +3,7 @@ local hookadd=hook.Add;
 local hookrun=hook.Run;
 local plyall=player.GetAll;
 local random=math.random;
+local writebool=net.WriteBool;
 local writeuint=net.WriteUInt;
 local writestr=net.WriteString;
 local vec=Vector;
@@ -15,6 +16,7 @@ function rwplayer.loadplayer(data,pl)
 	rwplayer.onsetname(nil,{pl,data.name});
 	rwplayer.onsetmoney(nil,{pl,data.money});
 	rwplayer.setusermode(pl,0);
+	rwplayer.setraiding(pl,false)
 end
 hookadd("db.loadplayer","rwplayer.loadplayer",rwplayer.loadplayer);
 
@@ -32,31 +34,10 @@ function rwplayer.playerspawn(pl)
 end
 hookadd("PlayerSpawn","rwplayer.playerspawn",rwplayer.playerspawn);
 
-function rwplayer.scaleplayerdamage( pl, hit, dmg )
-
-	local inf,att = dmg:GetInflictor(), dmg:GetAttacker()
-
-	if ( att:IsPlayer() || att:IsNPC() ) && !status.hasstatus( pl, "ghosted" ) && ( !pl.LastHit || pl.LastHit < CurTime() ) then
-		pl.LastHit = CurTime() + 2
-		pl:doHurtSound( hit )
-	end
-
-end
-hookadd( "ScalePlayerDamage", "rwplayer.scaleplayerdamage", rwplayer.scaleplayerdamage )
-
-function rwplayer.playerdeath( pl, inf, atk )
+function rwplayer.playerdeath(pl)
 	pl:SetViewOffset(vec(0,0,64));
 	pl:SetViewOffsetDucked(vec(0,0,28));
 	pl:addstatus("ghosted");
-	pl:doHurtSound( nil, true )
-
-	if atk:IsWorld() || inf:GetClass() == "rpg_missile" || inf:GetClass() == "npc_grenade_frag" || math.random() < 0.01 then
-		for i = 1, #player.GetHumans() do
-			local targ = player.GetHumans()[i]
-			if targ:withinbounds( pl, 2000 ) && pl:TestPVS( targ ) then targ:doNetGib() end
-		end
-	end
-
 end
 hookadd("PlayerDeath","rwplayer.playerdeath",rwplayer.playerdeath);
 
@@ -69,10 +50,10 @@ hookadd("PlayerLoadout","rwplayer.playerloadout",rwplayer.playerloadout);
 function rwplayer.playerdisconnected(pl)
 	if pl:spectating() then pl:unspecplayer() end
 	if pl.Speccers then
-		for ply, _ in pairs( pl.Speccers ) do
-			if IsValid(ply) then
+		for ply, _ in pairs( pl.Speccers ) do 
+			if IsValid(ply) then 
 				ply:unspecplayer()
-			else
+			else 
 				ply = nil
 			end
 		end
@@ -88,7 +69,7 @@ function rwplayer.playersetmodel(pl)
 end
 hookadd("PlayerSetModel","rwplayer.playersetmodel",rwplayer.playersetmodel);
 
---[[ RP Names --]]
+--[[ RP Names --]] 
 
 function rwplayer.onsetname(data,args)
 	local pl      = args[1];
@@ -114,7 +95,7 @@ function rwplayer.setname(pl,name)
 	db.getname({name},{pl,name},rwplayer.ongetname);
 end
 
---[[ Money --]]
+--[[ Money --]] 
 
 function rwplayer.onsetmoney(data,args)
 	local pl    = args[1];
@@ -136,7 +117,11 @@ function rwplayer.setusermode(pl,mode)
 	cache.write("usermode","set",pl,mode,plyall());
 end
 
---[[ Demotes --]]
+function rwplayer.setraiding( pl, num )
+	cache.write( "raiding", "set", pl, num, plyall() )
+end
+
+--[[ Demotes --]] 
 
 function rwplayer.demote(by,tgt,rsn)
 	if #rsn < 1 || #rsn > 32 then
@@ -154,7 +139,7 @@ function rwplayer.demote(by,tgt,rsn)
 	success(fmt);
 end
 
---[[ Metas ]]--
+--[[ Metas --]]
 
 function pl:setusermode(mode)
 	rwplayer.setusermode(self,mode);
@@ -178,10 +163,6 @@ end
 
 function pl:vote(decision)
 	rwplayer.vote(self,decision);
-end
-
-function pl:withinbounds( targ, dist )
-	return self:GetPos():DistToSqr( targ:GetPos() ) < ( dist * dist )
 end
 
 --[[ Spectate horsefuckery ]]-- made by div
@@ -250,18 +231,6 @@ function pl:unspecplayer()
 	self.Spec = nil
 end
 
--- [[ Gib Network Send ]]
-
-util.AddNetworkString( "rw.NetGib" )
-function pl:doNetGib()
-
-	local rag = self:GetRagdollEntity()
-	if IsValid(rag) then rag:Remove() end
-	net.Start( "rw.NetGib" )
-	net.Send( self )
-
-end
-
 --[[ Player Lib Extensions --]]
 
 function player.omit(t)
@@ -297,5 +266,13 @@ cache.register({
 	set=function(varid,ent,cached,mode)
 		cached[varid]=mode;
 		writeuint(mode,8);
+	end
+});
+
+cache.register({
+	name="raiding",
+	set=function(varid,ent,cached,raiding)
+		cached[varid]=raiding;
+		writebool(raiding);
 	end
 });

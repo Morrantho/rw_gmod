@@ -1,5 +1,4 @@
 if !admin.enabled then return; end
-local hookadd=hook.Add;
 local clamp = math.Clamp;
 toolrestraints = {};
 
@@ -21,7 +20,7 @@ function toolrestraints.hydraulic(pl,tool)
 	end
 	if spd < 0 || spd > 250 then
 		err("Hydraulic speed must be between 0-250.",pl);
-		return false;		
+		return false;
 	end
 	return true;
 end
@@ -30,7 +29,7 @@ function toolrestraints.motor(pl,tool)
 	local torque=tool:GetClientNumber("torque");
 	if torque<0||torque>500 then
 		err("Hydraulic speed must be between 0-500.",pl);
-		return false;		
+		return false;
 	end
 	return true;
 end
@@ -61,6 +60,22 @@ function toolrestraints.pulley(pl,tool)
 		return false;
 	end
 	return true;
+end
+
+local removables =
+{
+	["gmod_lamp"] = true,
+	["gmod_light"] = true,
+	["gmod_button"] = true,
+	["prop_physics"] = true,
+	["keypad"] = true,
+}
+
+function toolrestraints.remover(pl,tool)
+	local ent = pl:GetEyeTrace().Entity
+	if !IsValid( ent ) then return false end
+	if !removables[ ent:GetClass() ] then err( "You can not remove this entity." ) return false end
+	return true
 end
 
 function toolrestraints.rope(pl,tool)
@@ -121,7 +136,7 @@ function toolrestraints.light(pl,tool,tr)
 	if length<0||length>10 then
 		err("Light rope length must be between 0-10.",pl);
 		return false;
-	end	
+	end
 	return true;
 end
 
@@ -132,4 +147,4 @@ function admin.CanTool(pl,tr,tool)
 	end
 	return true;
 end
-hookadd("CanTool","admin.CanTool",admin.CanTool);
+hook.Add("CanTool","admin.CanTool",admin.CanTool);

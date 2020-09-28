@@ -34,3 +34,19 @@ end
 function pl:getpower()
 	return cache.get(self,"role") || role.member;
 end
+
+function pl:isbanned()
+	return self:getrole() >= 1
+end
+
+function pl:ismoderator()
+	return self:getrole() >= 3
+end
+
+function pl:isadmin()
+	return self:getrole() >= 4
+end
+
+function pl:isdeveloper()
+	return self:getrole() >= 7
+end

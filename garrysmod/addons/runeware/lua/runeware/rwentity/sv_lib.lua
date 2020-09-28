@@ -1,5 +1,3 @@
-local hookadd=hook.Add;
-
 if !rwentity.enabled then return; end
 local ent = FindMetaTable("Entity");
 
