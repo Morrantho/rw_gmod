@@ -7,6 +7,7 @@ function panel:Init()
 	local h=self.body:GetTall();
 	self.body:SetTall(h-navh);
 	self:mkpages();
+	self:MakePopup();
 end
 
 function panel:mkpages()
@@ -15,7 +16,7 @@ function panel:mkpages()
 	self.body:addpage("materials/f4/inventory.png","Inventory","cl_dbutton");
 	self.body:addpage("materials/f4/crafting.png","Crafting","cl_dbutton");
 	self.body:addpage("materials/f4/perks.png","Perks","cl_dbutton");
-	self.body:addpage("materials/f4/laws.png","Laws","cl_dbutton");
+	self.body:addpage("materials/f4/laws.png","Laws","cl_laws");
 	self.body:addpage("materials/f4/agendas.png","Agendas","cl_dbutton");
 	self.body:addpage("materials/f4/settings.png","Settings","cl_dbutton");
 	self.body:addpage("materials/f4/rules.png","Rules","cl_dbutton");

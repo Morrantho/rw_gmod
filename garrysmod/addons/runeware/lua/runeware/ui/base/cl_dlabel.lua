@@ -9,7 +9,6 @@ local panel={};
 
 function panel:Init()
 	self:SetText("");
-	self:SetFont("rw20");
 	self:SetTextColor(getcolor("whitest"));
 	self:SetContentAlignment(5);
 end

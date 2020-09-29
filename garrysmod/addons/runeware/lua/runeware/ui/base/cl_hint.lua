@@ -6,7 +6,7 @@ local drawoutlinedrect = surface.DrawOutlinedRect;
 local scrw,scrh        = ScrW,ScrH;
 local vguicreate       = vgui.Create;
 local entbyindex       = ents.GetByIndex;
-
+local scale=font.scale;
 local panel = {};
 
 function panel:Init()
@@ -17,21 +17,20 @@ function panel:Init()
 
 	self.close.DoClick = function()
 		if self.onclose then self.onclose(); end
-		prompt.dequeue(self);	
+		prompt.dequeue(self);
 	end
 
 	self.body=vguicreate("cl_dpanel",self);
 	self.body:Dock(TOP);
-	self.body:SetTall(h-(navh*2));
+	self.body:SetTall(h-navh);
 	self.body.Paint=nil;
 
 	self.text=vguicreate("cl_dlabel",self.body);
 	self.text:Dock(FILL);
-
-	self.footer=vguicreate("cl_dpanel",self);
-	self.footer:Dock(TOP);
-	self.footer:SetTall(navh);
-
+	self.text.Paint=function(s,w,h)
+		print(h/3.65);
+		s:SetFont(scale("rw",h/3.65));
+	end
 	self:Center();
 end
 ui.add("cl_hint",panel,"cl_dframe");

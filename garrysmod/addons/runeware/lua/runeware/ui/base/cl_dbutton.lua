@@ -1,15 +1,15 @@
 if !ui.enabled then return; end
-local setcolor = surface.SetDrawColor;
-local getcolor = color.get;
-local drawrect = surface.DrawRect;
-local drawoutlinedrect = surface.DrawOutlinedRect;
+local setcol=surface.SetDrawColor;
+local getcol=color.get;
+local rect=surface.DrawRect;
+local olrect=surface.DrawOutlinedRect;
 local scale=font.scale;
 
 local panel = {};
 
 function panel:Init()
 	self:SetText("");
-	self:SetTextColor(getcolor("whitest"));
+	self:SetTextColor(getcol("whitest"));
 	self:Center();
 	self:SetTall(ScrH()/32);
 	self.active=false;
@@ -17,21 +17,21 @@ end
 
 function panel:Paint(w,h)
 	if self:IsHovered() then
-		setcolor(getcolor("black"));
-		self:SetTextColor(getcolor("green"));
+		setcol(getcol("black"));
+		self:SetTextColor(getcol("green"));
 	else
-		setcolor(getcolor("blackerer"));
-		self:SetTextColor(getcolor("whitest"));
+		setcol(getcol("blackerer"));
+		self:SetTextColor(getcol("whitest"));
 	end
 	if self.active then
-		setcolor(getcolor("green"));
+		setcol(getcol("green"));
 	end
 	if self.active&&self:IsHovered() then
-		self:SetTextColor(getcolor("whitest"));
+		self:SetTextColor(getcol("whitest"));
 	end
-	drawrect(0,0,w,h);
-	setcolor(getcolor("blacker"));
-	drawoutlinedrect(0,0,w,h);
+	rect(0,0,w,h);
+	setcol(getcol("blacker"));
+	olrect(0,0,w,h);
 	self:SetFont(scale("rw",h));
 end
 ui.add("cl_dbutton",panel,"DButton");

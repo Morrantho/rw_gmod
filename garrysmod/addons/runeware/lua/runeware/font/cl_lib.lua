@@ -7,7 +7,6 @@ if !font.enabled then return; end
 local round=math.Round;
 
 function font.add(name,font,size)
-	print("font.add",name);
 	createfont(name,{
 		font = font,
 		size = size,
@@ -30,5 +29,5 @@ end
 function font.scale(f,h)
 	if h-16<1 then return f.."1"; end
 	if h-16>256 then return f.."256"; end
-	return f..h-16;
+	return f..round(h-16);
 end

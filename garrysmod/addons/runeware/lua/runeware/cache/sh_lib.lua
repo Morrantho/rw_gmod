@@ -4,6 +4,7 @@ cache.enabled=cache.enabled||true;
 cache.netvars=cache.netvars||{};
 cache.data=cache.data||{};
 cache.msgs=cache.msgs||{};
+cache.dump=cache.dump||{};
 if !cache.enabled then return; end
 function cache.register(netvar)
 	local netvarid=cache.netvars[netvar.name];

@@ -28,9 +28,9 @@ function panel:Init()
 
 	self.title=vgui.Create("cl_dbutton",self.nav);
 	self.title:Dock(LEFT);
-	self.title:SetText("R");
+	self.title:SetText("Runeware");
 	self.title.Paint=function(s,w,h)
-		s:SetFont(scale("rwtitle",h+16));
+		s:SetFont(scale("rw",h));
 	end
 
 	self.close=vgui.Create("cl_dbutton",self.nav);
