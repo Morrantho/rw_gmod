@@ -24,11 +24,7 @@ function panel:Init()
 	self.body:SetTall(h-(navh*2));
 	self.body.Paint = nil;
 
-	self.text = vguicreate("DLabel",self.body);
-	self.text:SetContentAlignment(5);
-	self.text:SetFont("rw20");
-	self.text:SetTextColor(color.get("whitest"));
-	self.text:SetText("Suck my ass?");
+	self.text = vguicreate("cl_dlabel",self.body);
 	self.text:Dock(FILL);
 
 	self.response = vguicreate("cl_dpanel",self);

@@ -3,12 +3,13 @@ local setcol=surface.SetDrawColor;
 local getcol=color.get;
 local rect=surface.DrawRect;
 local olrect=surface.DrawOutlinedRect;
+local scale=font.scale;
 
-local panel = {};
+local panel={};
 
 function panel:Init()
-	local scrw,scrh = ScrW(),ScrH();
-	local w,h = scrw/2,scrh/2;
+	local scrw,scrh=ScrW(),ScrH();
+	local w,h=scrw/2,scrh/2;
 	self:SetSize(w,h);
 	self:Center();
 	-- self:MakePopup();
@@ -17,7 +18,7 @@ function panel:Init()
 	self:DockPadding(0,0,0,0);
 	self:DockMargin(0,0,0,0);
 
-	self.nav = vgui.Create("cl_dpanel",self);
+	self.nav=vgui.Create("cl_dpanel",self);
 	self.nav:Dock(TOP);
 	self.nav:SetTall(scrh/32);
 	self.nav.Paint=function(s,w,h)
@@ -25,12 +26,14 @@ function panel:Init()
 		surface.DrawRect(0,0,w,h);
 	end
 
-	self.title = vgui.Create("cl_dbutton",self.nav);
+	self.title=vgui.Create("cl_dbutton",self.nav);
 	self.title:Dock(LEFT);
-	self.title:SetText("Runeware");
-	self.title.Paint=nil;
+	self.title:SetText("R");
+	self.title.Paint=function(s,w,h)
+		s:SetFont(scale("rwtitle",h+16));
+	end
 
-	self.close = vgui.Create("cl_dbutton",self.nav);
+	self.close=vgui.Create("cl_dbutton",self.nav);
 	self.close:Dock(RIGHT);
 	self.close:SetWide(self.nav:GetTall());
 	self.close:SetText("x");
@@ -40,8 +43,9 @@ function panel:Init()
 		else
 			s:SetTextColor(color.get("whitest"));
 		end
+		s:SetFont(scale("rw",h));
 	end
-	self.close.DoClick = function()
+	self.close.DoClick=function()
 		self:Close();
 	end
 end

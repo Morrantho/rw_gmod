@@ -7,6 +7,7 @@ if !font.enabled then return; end
 local round=math.Round;
 
 function font.add(name,font,size)
+	print("font.add",name);
 	createfont(name,{
 		font = font,
 		size = size,
@@ -22,12 +23,12 @@ function font.addscaledfont(name, fontname, start, count)
 	end
 end
 
-function font.add256(name,font)
-	for i=1,256 do font.add(name..i,font,i); end
+function font.add256(name,_font)
+	for i=1,256 do font.add(name..i,_font,i); end
 end
 
-function font.scale(h)
-	if h-8<1 then return "rw1"; end
-	if h-8>256 then return "rw256"; end
-	return "rw"..h-8;
+function font.scale(f,h)
+	if h-16<1 then return f.."1"; end
+	if h-16>256 then return f.."256"; end
+	return f..h-16;
 end

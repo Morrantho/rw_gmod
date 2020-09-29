@@ -2,8 +2,6 @@ local vguicreate=vgui.Create;
 local panel={};
 
 function panel:Init()
-	self.title:SetFont("rwtitle32");
-	self.title:SetText("R");
 	local navh=self.nav:GetTall();
 	self.body=vguicreate("cl_dpaginator",self);
 	local h=self.body:GetTall();

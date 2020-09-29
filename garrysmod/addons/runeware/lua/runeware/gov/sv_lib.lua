@@ -154,6 +154,13 @@ function gov.unarrest(cop,pl)
 	hookrun("gov.unarrest",cop,pl);
 end
 
+function gov.setlaws(mayor,laws)
+	if !mayor:ismayor() then
+		err("Only the mayor can set laws.",mayor);
+		return;
+	end
+end
+
 function pl:want(cop,rsn)
 	gov.want(cop,self,rsn);
 end
@@ -180,8 +187,8 @@ end
 
 cache.register({
 	name="laws",
-	set=function(varid,ent,cached,laws)	
-		-- if !cached[varid] then cached[varid]=laws; end
-		-- writestr(laws);
+	set=function(varid,ent,cached,laws)
+		if !cached[varid] then cached[varid]=laws; end
+		writestr(laws);
 	end,
 });

@@ -3,12 +3,12 @@ local setcolor = surface.SetDrawColor;
 local getcolor = color.get;
 local drawrect = surface.DrawRect;
 local drawoutlinedrect = surface.DrawOutlinedRect;
+local scale=font.scale;
 
 local panel = {};
 
 function panel:Init()
 	self:SetText("");
-	self:SetFont("rw20");
 	self:SetTextColor(getcolor("whitest"));
 	self:Center();
 	self:SetTall(ScrH()/32);
@@ -32,5 +32,6 @@ function panel:Paint(w,h)
 	drawrect(0,0,w,h);
 	setcolor(getcolor("blacker"));
 	drawoutlinedrect(0,0,w,h);
+	self:SetFont(scale("rw",h));
 end
 ui.add("cl_dbutton",panel,"DButton");
