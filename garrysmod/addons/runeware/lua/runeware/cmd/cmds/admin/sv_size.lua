@@ -39,27 +39,26 @@ end
 
 function CMD.run(ply,args,argstr)
 
-    print(ply:GetRunSpeed())
-    print(ply:GetViewOffset())
-
-    if #args < 1 || args[1] == "" then cmd.help(CMD,ply); return; end
+    if #args < 2 || args[1] == "" then cmd.help(CMD,ply); return; end
     local trg = findplayer(args[1]);
-    local size = math.Clamp( tonumber(args[2]), 0.01, 10 )
+    local size = tonumber(args[2])
+    if !isnumber(size) then
+        err( "Invalid size.",ply)
+        return;
+    end
+    local size = math.Clamp( size, 0.01, 10 )
 
     if !trg then err( "The player " .. args[1] .. " does not exist.",ply) return end
 
     local data = getrange(size);
-    -- // Variables not being called, what are their purpose? // removed 
 
     if !data then
         cmd.help(CMD,pl,"Size must be between 0-10.");
         return;
     end
 
-    -- // Unnecessary math equations, use math.clamp on the argument. // done
     if trg:IsPlayer() && isnumber( size ) then
         local stepSize          = 18 * size
-        -- // Same issue as before // fixed
         local jumpSize = data.jmp(size);
         local speedSize = data.spd(size);
         trg:SetViewOffset( Vector(0, 0, 64 * size * 0.9 ) )
