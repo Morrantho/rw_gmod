@@ -4,10 +4,11 @@ local pl=findmeta("Entity");
 -- sh lib
 -------------------------------------------------------------------------------
 role=role||{};
-role.enabled=role.enabled||true;
-role.dbg=role.dbg||false;
+role.enabled=true;
+role.dbg=false;
 role.bits=role.bits||1;
 if !role.enabled then return; end
+
 function role.add(name)
 	local id=role[name];
 	if !id then id=#role+1; end
@@ -23,6 +24,17 @@ function role.get(name)
 	local id = role[name];
 	if !id then return; end
 	return role[id];
+end
+
+function role.getplayers(role_power)
+	local all=player.GetAll();
+	local plys={};
+	for i=1,#all do
+		if all[i]:getpower()==role_power then
+			plys[#plys+1]=all[i];
+		end
+	end
+	return plys;
 end
 -------------------------------------------------------------------------------
 -- sh metas

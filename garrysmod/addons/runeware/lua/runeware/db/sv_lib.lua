@@ -20,7 +20,7 @@ function db.connect()
 	);
 	function db.instance:onConnected()
 		if db.dbg then print("db: connected"); end
-		-- runcmd("rw_clear","");
+		hookrun("db.connect");
 	end
 	function db.instance:onConnectionFailed(err)
 		if db.dbg then print("db: connection failed"); end
