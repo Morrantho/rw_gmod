@@ -24,7 +24,8 @@ end
 hookadd("PlayerSpawnedProp","admin.PlayerSpawnedProp",admin.PlayerSpawnedProp);
 
 function admin.PlayerSpawnEffect(pl,mdl)
-	return true;
+	err( "You can not spawn effects on the server", pl )
+	return false;
 end
 hookadd("PlayerSpawnEffect","admin.PlayerSpawnEffect",admin.PlayerSpawnEffect);
 
@@ -35,7 +36,8 @@ end
 hookadd("PlayerSpawnedEffect","admin.PlayerSpawnedEffect",admin.PlayerSpawnedEffect);
 
 function admin.PlayerSpawnNPC(pl,npctype,wep)
-	return true;
+	err( "You can not spawn NPCs on the server.", pl )
+	return false;
 end
 hookadd("PlayerSpawnNPC","admin.PlayerSpawnNPC",admin.PlayerSpawnNPC);
 
@@ -45,7 +47,8 @@ end
 hookadd("PlayerSpawnedNPC","admin.PlayerSpawnedNPC",admin.PlayerSpawnedNPC);
 
 function admin.PlayerSpawnRagdoll(pl,mdl)
-	return true;
+	err( "You can not spawn ragdolls on the server.", pl )
+	return false;
 end
 hookadd("PlayerSpawnRagdoll","admin.PlayerSpawnRagdoll",admin.PlayerSpawnRagdoll);
 
@@ -55,7 +58,8 @@ end
 hookadd("PlayerSpawnedRagdoll","admin.PlayerSpawnedRagdoll",admin.PlayerSpawnedRagdoll);
 
 function admin.PlayerSpawnSENT(pl)
-	return true;
+	err( "You can not spawn entities on the server.", pl )
+	return false;
 end
 hookadd("PlayerSpawnSENT","admin.PlayerSpawnSENT",admin.PlayerSpawnSENT);
 
@@ -65,7 +69,8 @@ end
 hookadd("PlayerSpawnedSENT","admin.PlayerSpawnedSENT",admin.PlayerSpawnedSENT);
 
 function admin.PlayerSpawnSWEP()
-	return true;
+	err( "You can not spawn weapons on the server.", pl )
+	return false;
 end
 hookadd("PlayerSpawnSWEP","admin.PlayerSpawnSWEP",admin.PlayerSpawnSWEP);
 
@@ -75,6 +80,7 @@ end
 hookadd("PlayerSpawnedSWEP","admin.PlayerSpawnedSWEP",admin.PlayerSpawnedSWEP);
 
 function admin.PlayerSpawnVehicle()
+	err( "You can not spawn vehicles on the server.", pl )
 	return false;
 end
 hookadd("PlayerSpawnVehicle","admin.PlayerSpawnVehicle",admin.PlayerSpawnVehicle);

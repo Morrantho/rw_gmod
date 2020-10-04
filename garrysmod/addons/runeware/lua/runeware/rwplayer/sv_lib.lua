@@ -3,6 +3,7 @@ local hookadd=hook.Add;
 local hookrun=hook.Run;
 local plyall=player.GetAll;
 local random=math.random;
+local writebool=net.WriteBool;
 local writeuint=net.WriteUInt;
 local writestr=net.WriteString;
 local vec=Vector;
@@ -15,6 +16,7 @@ function rwplayer.loadplayer(data,pl)
 	rwplayer.onsetname(nil,{pl,data.name});
 	rwplayer.onsetmoney(nil,{pl,data.money});
 	rwplayer.setusermode(pl,0);
+	rwplayer.setraiding(pl,false)
 end
 hookadd("db.loadplayer","rwplayer.loadplayer",rwplayer.loadplayer);
 
@@ -122,6 +124,10 @@ function rwplayer.setusermode(pl,mode)
 	cache.write("usermode","set",pl,mode,plyall());
 end
 
+function rwplayer.setraiding( pl, num )
+	cache.write( "raiding", "set", pl, num, plyall() )
+end
+
 --[[ Demotes --]] 
 
 function rwplayer.demote(by,tgt,rsn)
@@ -140,7 +146,7 @@ function rwplayer.demote(by,tgt,rsn)
 	success(fmt);
 end
 
---[[ Metas --]] 
+--[[ Metas --]]
 
 function pl:setusermode(mode)
 	rwplayer.setusermode(self,mode);
@@ -279,5 +285,13 @@ cache.register({
 	set=function(varid,ent,cached,mode)
 		cached[varid]=mode;
 		writeuint(mode,8);
+	end
+});
+
+cache.register({
+	name="raiding",
+	set=function(varid,ent,cached,raiding)
+		cached[varid]=raiding;
+		writebool(raiding);
 	end
 });

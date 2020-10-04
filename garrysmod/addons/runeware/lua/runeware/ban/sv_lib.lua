@@ -1,8 +1,8 @@
 local hookadd=hook.Add;
 local hookrun=hook.Run;
 ban=ban||{};
-ban.dbg=false;
-ban.enabled=true;
+ban.dbg=ban.dbg||false;
+ban.enabled=ban.enabled||true;
 if !ban.enabled then return; end
 function ban.PlayerAuthed(pl)
 	db.isbanned({pl:SteamID()},{pl},ban.onauthed);
