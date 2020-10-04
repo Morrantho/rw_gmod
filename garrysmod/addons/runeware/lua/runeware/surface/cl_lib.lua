@@ -27,17 +27,17 @@ end
 local i = 12
 local mode = true
 
-hook.Add("HUDPaint", "painttest", function()
-    local p = Vector(1700, 800)
-    if mode then
-        i = i + .1 
-        if i >= 64 then mode = false end 
-    else
-        i = i - .1
-        if i <= 12 then mode = true end
-    end
+--hook.Add("HUDPaint", "painttest", function()
+    --local p = Vector(1700, 800)
+    --if mode then
+    --    i = i + .1 
+    --    if i >= 64 then mode = false end 
+    --else
+    --    i = i - .1
+    --    if i <= 12 then mode = true end
+    --end
 
-    surface.DrawScaledText("Test text", "rw", i, p)
-    surface.SetTextPos(p.x, p.y)
-    surface.DrawText("Test text")
-end)
+    --surface.DrawScaledText("Test text", "rw", i, p)
+    --surface.SetTextPos(p.x, p.y)
+    --surface.DrawText("Test text")
+--end)

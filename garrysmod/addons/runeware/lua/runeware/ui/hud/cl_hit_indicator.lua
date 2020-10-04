@@ -86,6 +86,6 @@ local function tracehurt(args)
     createIndicator(args.attacker, color.get("redder"), atk:GetPos() + atk:OBBCenter(), 3)
 end
 
-hook.Add("player_hurt", "traceHurt", tracehurt )
-hook.Add("HUDPaint", "ui.dangerIndicator", drawIndicators)
+--hook.Add("player_hurt", "traceHurt", tracehurt )
+--hook.Add("HUDPaint", "ui.dangerIndicator", drawIndicators)
 net.Receive("ui.warningIndicator", tracemiss)

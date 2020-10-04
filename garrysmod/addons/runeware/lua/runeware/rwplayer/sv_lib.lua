@@ -3,6 +3,7 @@ local hookadd=hook.Add;
 local hookrun=hook.Run;
 local plyall=player.GetAll;
 local random=math.random;
+local writebool=net.WriteBool;
 local writeuint=net.WriteUInt;
 local writestr=net.WriteString;
 local vec=Vector;
@@ -15,6 +16,7 @@ function rwplayer.loadplayer(data,pl)
 	rwplayer.onsetname(nil,{pl,data.name});
 	rwplayer.onsetmoney(nil,{pl,data.money});
 	rwplayer.setusermode(pl,0);
+	rwplayer.setraiding(pl,false)
 end
 hookadd("db.loadplayer","rwplayer.loadplayer",rwplayer.loadplayer);
 
@@ -32,10 +34,17 @@ function rwplayer.playerspawn(pl)
 end
 hookadd("PlayerSpawn","rwplayer.playerspawn",rwplayer.playerspawn);
 
-function rwplayer.playerdeath(pl)
+function rwplayer.playerdeath( pl, inf, atk )
 	pl:SetViewOffset(vec(0,0,64));
 	pl:SetViewOffsetDucked(vec(0,0,28));
 	pl:addstatus("ghosted");
+
+	if atk:IsWorld() || inf:GetClass() == "rpg_missile" || inf:GetClass() == "npc_grenade_frag" || math.random() < 0.01 then
+		for _, ply in ipairs( ents.FindInSphere( pl:GetPos(), 2000) ) do
+			if ply:IsPlayer() && ply:TestPVS( pl ) then ply:doNetGib() end
+		end
+	end
+
 end
 hookadd("PlayerDeath","rwplayer.playerdeath",rwplayer.playerdeath);
 
@@ -115,6 +124,10 @@ function rwplayer.setusermode(pl,mode)
 	cache.write("usermode","set",pl,mode,plyall());
 end
 
+function rwplayer.setraiding( pl, num )
+	cache.write( "raiding", "set", pl, num, plyall() )
+end
+
 --[[ Demotes --]] 
 
 function rwplayer.demote(by,tgt,rsn)
@@ -133,7 +146,7 @@ function rwplayer.demote(by,tgt,rsn)
 	success(fmt);
 end
 
---[[ Metas --]] 
+--[[ Metas --]]
 
 function pl:setusermode(mode)
 	rwplayer.setusermode(self,mode);
@@ -225,6 +238,18 @@ function pl:unspecplayer()
 	self.Spec = nil
 end
 
+-- [[ Gib Network Send ]]
+
+util.AddNetworkString( "rw.NetGib" )
+function pl:doNetGib()
+
+	local rag = self:GetRagdollEntity()
+	if IsValid(rag) then rag:Remove() end
+	net.Start( "rw.NetGib" )
+	net.Send( self )
+
+end
+
 --[[ Player Lib Extensions --]]
 
 function player.omit(t)
@@ -260,5 +285,13 @@ cache.register({
 	set=function(varid,ent,cached,mode)
 		cached[varid]=mode;
 		writeuint(mode,8);
+	end
+});
+
+cache.register({
+	name="raiding",
+	set=function(varid,ent,cached,raiding)
+		cached[varid]=raiding;
+		writebool(raiding);
 	end
 });

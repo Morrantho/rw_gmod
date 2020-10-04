@@ -1,18 +1,18 @@
-local writestr=net.WriteString;
-local writevec=net.WriteVector;
-
 cache.register({
-	name="waypoints",
-	
-	add=function(varid,ent,cached,netdata)
-		if !cached[varid] then cached[varid]={}; end
-		cached[varid][netdata.title]=netdata.pos;
-		writestr(netdata.title);
-		writevec(netdata.pos);
-	end,
+    name="waypoints",
+    
+    add=function(varid,ent,cached,netdata)
+        if !cached[varid] then cached[varid]={}; end
+        cached[varid][netdata.title]=netdata.pos;
+        net.WriteString(netdata.title);
+        net.WriteVector(netdata.pos);
+        --net.WriteColor(netdata.col);
+        print("WAYPOINT ADD",ent);
+    end,
 
-	remove=function(varid,ent,cached,netdata)
-		cached[varid][netdata.title]=nil;
-		writestr(netdata.title);
-	end
+    remove=function(varid,ent,cached,netdata)
+        cached[varid][netdata.title]=nil
+        net.WriteString(netdata.title)
+        print("WAYPOINT REMOVE",ent);
+    end
 });

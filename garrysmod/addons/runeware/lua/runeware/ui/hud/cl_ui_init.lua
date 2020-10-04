@@ -2,9 +2,10 @@ local function init()
     local scrw = ScrW()
     local scrh = ScrH()
 
-    hud.health = vgui.Create("cl_ui_health")
-    hud.health:SetPos(scrw * .10, scrh * .95)
-    hud.health:SetSize(scrw * .20, scrh * .04)
+    hud.health = vgui.Create("cl_hp")
+    hud.health:SetPos(scrw * .02, scrh * .65)
+    hud.armor = vgui.Create("cl_armor")
+    hud.armor:SetPos(scrw * .02, scrh * .69)
 end
 
 if hud then 
@@ -12,8 +13,8 @@ if hud then
         v:Remove()
     end
     init()
-end 
+end
 
 hud = hud or {} 
 
-hook.Add("InitPostEntity", "startup", init)
+--hook.Add("InitPostEntity", "startup", init)

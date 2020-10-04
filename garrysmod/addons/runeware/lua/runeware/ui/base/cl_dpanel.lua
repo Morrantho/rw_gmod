@@ -1,8 +1,8 @@
 if !ui.enabled then return; end
-local setcolor         = surface.SetDrawColor;
-local getcolor         = color.get;
-local drawrect         = surface.DrawRect;
-local drawoutlinedrect = surface.DrawOutlinedRect;
+local setcol=surface.SetDrawColor;
+local getcol=color.get;
+local rect=surface.DrawRect;
+local olrect=surface.DrawOutlinedRect;
 local scrw,scrh        = ScrW,ScrH;
 
 local panel = {};
@@ -13,9 +13,9 @@ function panel:Init()
 end
 
 function panel:Paint(w,h)
-	setcolor(getcolor("blacker"));
-	drawrect(0,0,w,h);
-	setcolor(getcolor("blackest"));
-	drawoutlinedrect(0,0,w,h);
+	setcol(getcol("blackest"));
+	rect(0,0,w,h);
+	setcol(getcol("blacker"));
+	olrect(0,0,w,h);
 end
 ui.add("cl_dpanel",panel,"DPanel");

@@ -24,7 +24,30 @@ function perk.exec(perkname,plys,cb)
 		if cb then cb(res); end
 	end
 end
-
+-- return # of perk points or 0.
+function perk.getpoints(pl)
+	return cache.get(pl,"perkpoints")||0;
+end
+-- whether we have enough points to purchase it.
+function perk.haspoints(pl,perkname)
+	local cost=perk[perk[perkname]].cost;
+	local pts=perk.getpoints(pl);
+	return pts-cost>=0;
+end
+-- whether we have the perk already. for reuse, returns false until you reach max tier.
+function perk.has(pl,perkname)
+	local perkid=perk[perkname];
+	local _perk=perk[perkid];
+	local pperks=cache.get(pl,"perks")||{};
+	local ptier=pperks[perkid]||0;
+	return ptier>=_perk.tiers;
+end
+-- get a players current tier for the perk. 0 if they dont have the perk.
+function perk.get(pl,perkname)
+	local perkid=perk[perkname];
+	local perks=cache.get(pl,"perks")||{};
+	return perks[perkid]||0;
+end
 function pl:getperkpoints()
 	return perk.getpoints(self);
 end
