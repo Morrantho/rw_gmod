@@ -18,10 +18,16 @@ function prompt.colorize(netdata,pnl)
 		if type(data)!="string" then continue; end
 		data=data:lower();
 		if data:find("want") then
-			pnl.text:SetTextColor(color.get("blue"));
+			pnl.nav.Paint=function(s,w,h)
+				surface.SetDrawColor(color.get("blue"));
+				surface.DrawRect(0,0,w,h);
+			end
 		end
 		if data:find("warrant") then
-			pnl.text:SetTextColor(color.get("red"));
+			pnl.nav.Paint=function(s,w,h)
+				surface.SetDrawColor(color.get("red"));
+				surface.DrawRect(0,0,w,h);
+			end
 		end
 	end
 end

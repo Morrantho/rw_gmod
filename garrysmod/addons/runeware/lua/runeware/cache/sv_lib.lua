@@ -2,8 +2,8 @@ if !cache.enabled then return; end
 local type=type;
 local pairs=pairs;
 local floor=math.floor;
-local tableremove=table.remove;
-local tableinsert=table.insert;
+local popf=table.remove;
+local push=table.insert;
 local netstart=net.Start;
 local writeuint=net.WriteUInt;
 local playergetall=player.GetAll;
@@ -18,57 +18,42 @@ function cache.write(key,action,ent,value,to)
 	-- if to && to:isconsole() then return; end
 	local cacheid  = nil;
 	if ent:IsPlayer() then
-		cacheid = ent:SteamID();
+		cacheid=ent:SteamID();
 	else
-		cacheid = ent:EntIndex();
+		cacheid=ent:EntIndex();
 	end
-	local netvarid = cache.netvars[key];
-	local netvar   = cache.netvars[netvarid];
-	local funcid   = netvar[action];
-	local func     = netvar[funcid];
+	local netvarid=cache.netvars[key];
+	local netvar=cache.netvars[netvarid];
+	local funcid=netvar[action];
+	local func=netvar[funcid];
 	if !cache.data[cacheid] then cache.data[cacheid] = {}; end -- init if not already
-	tableinsert(cache.msgs,function()		
+	push(cache.msgs,function(dumpto)
 		netstart("cache.write");
 		writeuint(netvarid,8); -- key / field name to affect
 		writeuint(funcid,netvar.funcbits); -- function id. this grows depending on # functions the netvar has.
 		writeuint(ent:EntIndex(),13); -- entindex
 		func(netvarid,ent,cache.data[cacheid],value); -- append w/e data the netvar needs
-		netsend(to || playergetall());
+		if dumpto then
+		--if dumpto&&!to then--if it was sent to one player, we probably dont need it.
+			netsend(dumpto);
+		else
+			netsend(to||playergetall());
+		end
 		if cache.dbg then cache.log(key,action,ent,value,to); end
 	end);
 end
 
-function cache.sendall(pl)
-	local sid     = pl:SteamID();
-	local data    = cache.data;
-	local netvars = cache.netvars;
-	for a,b in pairs(data) do
-		if a == sid then continue; end -- skip writing our own data / record entirely.
-		for i=1,#b do -- 1 - #allnetvars
-			local value  = b[i];
-			local netvar = netvars[i];
-			if type(value) == "table" then continue; end -- dont write maps / arrays.
-			if !netvar.set then continue; end -- dont write if it doesnt have a setter.
-			local ent = nil;
-			if type(a) == "number" then -- actual entity
-				ent = getbyindex(a)
-			elseif type(a) == "string" then -- player / sid
-				ent = getbysteamid(a);
-			end
-			cache.write(netvar.name,"set",ent,value,pl);
-		end		
-	end
-end
-
 function cache.tick()
 	if #cache.msgs < 1 then return; end
-	if !cache.ticks then cache.ticks = 0; end
-	cache.rate = floor(#cache.msgs/cache.tickrate);
-	if cache.ticks > cache.rate then
-		tableremove(cache.msgs,1)();
-		cache.ticks = 0;
+	if !cache.ticks then cache.ticks=0; end
+	cache.rate=floor(#cache.msgs/cache.tickrate);
+	if cache.ticks>cache.rate then
+		local msg=popf(cache.msgs,1);
+		push(cache.dump,msg);
+		msg();
+		cache.ticks=0;
 	else
-		cache.ticks = cache.ticks+1;
+		cache.ticks=cache.ticks+1;
 	end
 end
 hookadd("Tick","cache.tick",cache.tick);
@@ -79,6 +64,8 @@ end
 hookadd("PlayerDisconnected","cache.PlayerDisconnected",cache.PlayerDisconnected);
 
 function cache.loadplayer(data,pl)
-	cache.sendall(pl);
+	for i=1,#cache.dump do
+		cache.dump[i](pl);
+	end
 end
 hookadd("db.loadplayer","cache.loadplayer",cache.loadplayer);
