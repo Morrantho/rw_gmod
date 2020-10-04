@@ -10,6 +10,7 @@ local drawtext=draw.SimpleText;
 local frametime=RealFrameTime;
 local clamp=math.Clamp;
 local lerp=Lerp;
+local scrw,scrh = ScrW(),ScrH();
 local col=Color;
 local white=col(255,255,255,255);
 local center=TEXT_ALIGN_CENTER;
@@ -17,7 +18,7 @@ local center=TEXT_ALIGN_CENTER;
 local apnl={};
 
 function apnl:Init()
-    self:SetSize(280,35);
+    self:SetSize(scrw*.145,scrh*.034);
     self:Center();
     local shield=vguicreate("DImage",self);
     shield:SetPos(5,5);

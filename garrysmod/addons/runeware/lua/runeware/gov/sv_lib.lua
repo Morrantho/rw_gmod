@@ -3,10 +3,27 @@ local writestr=net.WriteString;
 local netstr=util.AddNetworkString;
 local netstart=net.Start;
 local netsend=net.Send;
+local netrcv=net.Receive;
+local readstr=net.ReadString;
+local readuint=net.ReadUInt;
 local findmeta=FindMetaTable;
 local hookrun=hook.Run;
+local hookadd=hook.Add;
 local rand=math.random;
+local getbyidx=ents.GetByIndex;
 local pl=findmeta("Player");
+
+netstr("gov.onsetlaws");
+
+function gov.init()
+	cache.write("laws","set",getbyidx(0),gov.defaultlaws);
+end
+hookadd("Initialize","gov.init",gov.init);
+
+function gov.onsetlaws()
+	gov.setlaws(Player(readuint(7)),readstr());
+end
+netrcv("gov.onsetlaws",gov.onsetlaws);
 
 function gov.want(cop,pl,rsn)
 	if cop&&!cop:iscop() then
@@ -154,6 +171,19 @@ function gov.unarrest(cop,pl)
 	hookrun("gov.unarrest",cop,pl);
 end
 
+function gov.setlaws(mayor,laws)
+	if !mayor:ismayor() then
+		err("Only the mayor can set laws.",mayor);
+		return;
+	end
+	if #laws<1||#laws>2048 then
+		err("Laws must be between 1-2048 characters in length.",mayor);
+		return;
+	end
+	cache.write("laws","set",getbyidx(0),laws);--broadcast
+	success("The laws have changed.");
+end
+
 function pl:want(cop,rsn)
 	gov.want(cop,self,rsn);
 end
@@ -180,8 +210,8 @@ end
 
 cache.register({
 	name="laws",
-	set=function(varid,ent,cached,laws)	
-		-- if !cached[varid] then cached[varid]=laws; end
-		-- writestr(laws);
+	set=function(varid,ent,cached,laws)
+		if !cached[varid] then cached[varid]=laws; end
+		writestr(laws);
 	end,
 });

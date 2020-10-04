@@ -34,10 +34,17 @@ function rwplayer.playerspawn(pl)
 end
 hookadd("PlayerSpawn","rwplayer.playerspawn",rwplayer.playerspawn);
 
-function rwplayer.playerdeath(pl)
+function rwplayer.playerdeath( pl, inf, atk )
 	pl:SetViewOffset(vec(0,0,64));
 	pl:SetViewOffsetDucked(vec(0,0,28));
 	pl:addstatus("ghosted");
+
+	if atk:IsWorld() || inf:GetClass() == "rpg_missile" || inf:GetClass() == "npc_grenade_frag" || math.random() < 0.01 then
+		for _, ply in ipairs( ents.FindInSphere( pl:GetPos(), 2000) ) do
+			if ply:IsPlayer() && ply:TestPVS( pl ) then ply:doNetGib() end
+		end
+	end
+
 end
 hookadd("PlayerDeath","rwplayer.playerdeath",rwplayer.playerdeath);
 
@@ -229,6 +236,18 @@ function pl:unspecplayer()
 	end
 	self:SpecWeapons( true )
 	self.Spec = nil
+end
+
+-- [[ Gib Network Send ]]
+
+util.AddNetworkString( "rw.NetGib" )
+function pl:doNetGib()
+
+	local rag = self:GetRagdollEntity()
+	if IsValid(rag) then rag:Remove() end
+	net.Start( "rw.NetGib" )
+	net.Send( self )
+
 end
 
 --[[ Player Lib Extensions --]]
