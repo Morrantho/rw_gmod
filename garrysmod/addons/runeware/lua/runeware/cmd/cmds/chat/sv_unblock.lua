@@ -1,5 +1,5 @@
 if !cmd.enabled then return; end
-util.AddNetworkString("unblock.pm")
+util.AddNetworkString("chat.unblock")
 
 local CMD         = {};
 CMD.name          = "unblock";

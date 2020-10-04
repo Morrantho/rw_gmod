@@ -27,14 +27,14 @@ function role.get(name)
 end
 
 function role.getplayers(role_power)
-	local all=player.GetAll();
-	local plys={};
-	for i=1,#all do
-		if all[i]:getpower()==role_power then
-			plys[#plys+1]=all[i];
-		end
-	end
-	return plys;
+    local all=player.GetAll();
+    local plys={};
+    for i=1,#all do
+        if all[i]:getpower()==role_power then
+            plys[#plys+1]=all[i];
+        end
+    end
+    return plys;
 end
 -------------------------------------------------------------------------------
 -- sh metas
