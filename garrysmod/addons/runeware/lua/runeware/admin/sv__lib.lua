@@ -1,5 +1,7 @@
 if !admin.enabled then return; end
+local findmeta=FindMetaTable;
 local getcolor=color.get;
+local pl=findmeta("Player");
 --[[ sets the entities' owner. can be used for unowning. plz dont net ownership. --]]
 function admin.ownent(pl,ent)
 	local idx=ent:EntIndex();
@@ -53,4 +55,32 @@ function admin.handleproplimit(pl)
 		return false;
 	end
 	return true;
+end
+
+function pl:IsAdmin()
+	return self:getrole()>role.moderator;
+end
+
+function pl:IsSuperAdmin()
+	return self:getrole()>role.admin;
+end
+
+function pl:isbanned()
+	return self:getrole()==role.banned;
+end
+
+function pl:getusermode()
+	return cache.get(self,"usermode")||0;
+end
+
+function pl:hasusermode(mode)
+	return bit.band(self:getusermode(),mode);
+end
+
+function pl:getpropcount()
+	return self:GetCount("props");
+end
+
+function pl:isowner(ent)
+	return ent.owner==self;
 end
