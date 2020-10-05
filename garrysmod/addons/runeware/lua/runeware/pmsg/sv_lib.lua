@@ -4,8 +4,6 @@ function pmsg( Ent, Args )
     if #Args % 2 != 0 then return end
     if !Ent then Ent = player.GetAll() end
 
-    PrintTable( Args )
-
     net.Start( "rw.pmsg" )
         net.WriteInt( #Args, 8 )
         for i = 1, #Args, 2 do
