@@ -39,7 +39,7 @@ function setname.run(pl,args,argstr)
 end
 
 function setname.ongetname(pl,name,exists)
-	if exists then
+	if exists && !pl.lpchk then
 		cmd.help(setname,pl,"The name "..name.." is already taken.");
 	end
 end
@@ -48,8 +48,15 @@ hook.Add("rwplayer.ongetname","setname.ongetname",setname.ongetname);
 function setname.onsetname(pl,oldname,newname)
 	oldname = oldname || pl:getname();
 	local sid = pl:SteamID();
-	success(oldname.." ("..sid..") changed their name to "..newname..".");
+	local S
+	if pl.lpchk then
+		pl.lpchk = nil
+		S = oldname .. " (" .. sid .. ") randomly changed their name to " .. newname .. "."
+	else
+		S = oldname .. " (" .. sid .. ") changed their name to " .. newname .. "."
+	end
+	success( S );
 end
 hook.Add("rwplayer.onsetname","setname.ongetname",setname.onsetname);
 
-cmd.add(setname);
+cmd.add(setname,"name","rpname");

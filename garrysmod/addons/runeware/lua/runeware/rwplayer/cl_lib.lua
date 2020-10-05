@@ -2,6 +2,16 @@ if !rwplayer.enabled then return; end
 local readuint=net.ReadUInt;
 local readstr=net.ReadString;
 local readbool=net.ReadBool;
+local hookadd = hook.Add;
+local tse = timer.Simple;
+
+function rwplayer.initpostentity()
+	tse( 0.1, function()
+		net.Start( "rwplayer.onclientinit" )
+		net.SendToServer()
+	end)
+end
+hookadd("InitPostEntity","rwplayer.initpostentity",rwplayer.initpostentity);
 
 cache.register({
 	name="money",

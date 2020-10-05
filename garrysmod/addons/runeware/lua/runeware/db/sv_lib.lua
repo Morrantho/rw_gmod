@@ -39,7 +39,7 @@ function db.query(query,params,extra,func)
 			ps:setNumber(i,param);
 		elseif t == "bool" then
 			ps:setBoolean(i,param);
-		elseif !t or t == "nil" then
+		elseif !t || t == "nil" then
 			ps:setNull(i);
 		end
 	end
@@ -87,7 +87,7 @@ function db.ongetplayer(data,args)
 	end
 	if !exists then -- First Join
 		local sid   = pl:SteamID();
-		local name  = pl:Name();
+		local name  = rwplayer.getrandomname() || pl:Name();
 		local ROLE  = role[admin.defaults[sid]] || role[admin.defaultrole];
 		local money = admin.defaultmoney;
 		db.addplayer({sid,name,ROLE,money},args,db.onaddplayer);
