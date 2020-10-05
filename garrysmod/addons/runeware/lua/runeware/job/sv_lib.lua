@@ -18,7 +18,6 @@ function job.setjob(pl,jobname,mdl)
 	assert(jobid,"Invalid Job: "..jobname);
 	local _job=job[jobid];
 	cache.write("job","set",pl,jobid,pl);
-	print( "I kill you in job." )
 	pl:KillSilent();
 end
 
