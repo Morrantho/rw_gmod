@@ -15,7 +15,7 @@ local vec=Vector;
 local function rendercost(DOOR,alpha)
 	if DOOR:isdoorunownable() then return; end
 	local col=Color(255,255,255,alpha);
-	drawtext("For Sale: $"..DOOR:getdoorcost(),"rw256",0,256,col,1,1);
+	drawtext("For Sale: $"..DOOR:getdoorcost(),"rw192",0,256,col,1,1);
 end
 
 local function renderowners(DOOR,alpha)
@@ -29,7 +29,7 @@ local function renderowners(DOOR,alpha)
 			local name=pl:getname();
 			local jobcol=pl:getjob().color;
 			col=Color(jobcol.r,jobcol.g,jobcol.b,alpha);
-			drawtext(name,"rw256",0,i*256,col,1,1);
+			drawtext(name,"rw192",0,i*256,col,1,1);
 		end
 	end
 end
@@ -48,18 +48,18 @@ function door.prop_door_rotating(DOOR,dist)
 
 	camstart(pos+d+w+h,ang,0.02);
 	if door.dbg then
-		drawtext(DOOR:EntIndex(),"rw256",0,-256,col,1,1);
-	end	
-	drawtext(title,"rw256",0,0,col,1,1);
+		drawtext(DOOR:EntIndex(),"rwheading256",0,-256,col,1,1);
+	end
+	drawtext(title,"rwheading256",0,0,col,1,1);
 	renderowners(DOOR,alpha);
 	camend();
 
 	ang:RotateAroundAxis(ang:Right(),180);
 	camstart(pos+-d+w+h,ang,0.02);
 	if door.dbg then
-		drawtext(DOOR:EntIndex(),"rw256",0,-256,col,1,1);
+		drawtext(DOOR:EntIndex(),"rwheading256",0,-256,col,1,1);
 	end	
-	drawtext(title,"rw256",0,0,col,1,1);
+	drawtext(title,"rwheading256",0,0,col,1,1);
 	renderowners(DOOR,alpha);
 	camend();
 end
@@ -82,9 +82,9 @@ function door.func_door(DOOR,dist)
 	end
 	camstart(pos+d+w+h,ang,0.02);
 	if door.dbg then
-		drawtext(DOOR:EntIndex(),"rw256",0,-256,col,1,1);
+		drawtext(DOOR:EntIndex(),"rwheading256",0,-256,col,1,1);
 	end
-	drawtext(title,"rw256",0,0,col,1,1);
+	drawtext(title,"rwheading256",0,0,col,1,1);
 	renderowners(DOOR,alpha);
 	camend();
 	if siz.x<siz.y then
@@ -95,9 +95,9 @@ function door.func_door(DOOR,dist)
 	ang:RotateAroundAxis(ang:Right(),180);
 	camstart(pos+d+w+h,ang,0.02);
 	if door.dbg then
-		drawtext(DOOR:EntIndex(),"rw256",0,-256,col,1,1);
+		drawtext(DOOR:EntIndex(),"rwheading256",0,-256,col,1,1);
 	end	
-	drawtext(title,"rw256",0,0,col,1,1);
+	drawtext(title,"rwheading256",0,0,col,1,1);
 	renderowners(DOOR,alpha);
 	camend();
 end

@@ -4,7 +4,7 @@ local plyall=player.GetAll;
 local push=table.insert;
 door=door||{};
 door.dbg=false;
-door.enabled=door.enabled||true;
+door.enabled=true;
 if !door.enabled then return; end
 door.groups=door.groups||{};
 door.doors=door.doors||{};

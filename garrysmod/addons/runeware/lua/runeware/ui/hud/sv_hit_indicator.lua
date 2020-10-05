@@ -22,4 +22,4 @@ local function tracemiss(ent, bullet)
     end
 end
 
-hook.Add("EntityFireBullets", "ui.tracemiss", tracemiss)
+--hook.Add("EntityFireBullets", "ui.tracemiss", tracemiss)

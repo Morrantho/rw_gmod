@@ -5,7 +5,7 @@ local localplayer=LocalPlayer;
 
 
 function waypoint.draw2d()
-    print("waypoint.draw2d");
+    --print("waypoint.draw2d");
     -- local pl=LocalPlayer();
     -- local plpos=pl:GetPos();
     -- local waypoints=cache.get("waypoints",pl);
@@ -22,7 +22,7 @@ end
 hookadd("HUDPaint","waypoint.draw2d",waypoint.draw2d);
 
 function waypoint.draw3d()
-    print("waypoint.draw3d");
+    --print("waypoint.draw3d");
     -- local pl=LocalPlayer();
     -- local waypoints=cache.get("waypoints",pl);
     -- for title,wpos in pairs(waypoints) do

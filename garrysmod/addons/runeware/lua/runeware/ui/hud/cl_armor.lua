@@ -10,14 +10,15 @@ local drawtext=draw.SimpleText;
 local frametime=RealFrameTime;
 local clamp=math.Clamp;
 local lerp=Lerp;
+local scrw,scrh = ScrW(),ScrH();
 local col=Color;
 local white=col(255,255,255,255);
 local center=TEXT_ALIGN_CENTER;
 
-local apnl={};
+local panel={};
 
-function apnl:Init()
-    self:SetSize(280,35);
+function panel:Init()
+    self:SetSize(scrw*.145,scrh*.034);
     self:Center();
     local shield=vguicreate("DImage",self);
     shield:SetPos(5,5);
@@ -25,7 +26,7 @@ function apnl:Init()
     shield:SetImage("materials/hud/armor.png");
 end
 
-function apnl:Paint(w,h)
+function panel:Paint(w,h)
 	-- This is the background of the bar, we are setting the gradient material to the background, and applying a black color. This can be changed with RW's color library
     setcol(0,0,0,240);
     setmat(grad);
@@ -47,4 +48,4 @@ function apnl:Paint(w,h)
     -- armor numerical 
     drawtext(armor,"rw28",56,18,white,center,center);
 end
-ui.add("cl_armor",apnl,"cl_ddraggable");
+ui.add("cl_armor",panel,"cl_ddraggable");
