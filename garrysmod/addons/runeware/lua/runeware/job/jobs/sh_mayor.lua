@@ -8,6 +8,8 @@ JOB.models      =
 {
 	"models/player/breen.mdl",
 	"models/player/magnusson.mdl",
+	"models/player/mossman.mdl",
+	"models/player/mossman_arctic.mdl"
 };
 JOB.loadout     =
 {
