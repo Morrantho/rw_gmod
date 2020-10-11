@@ -6,6 +6,8 @@ local function init()
     hud.health:SetPos(scrw * .02, scrh * .65)
     hud.armor = vgui.Create("cl_armor")
     hud.armor:SetPos(scrw * .02, scrh * .69)
+  --  hud.beta = vgui.Create("cl_beta")
+    
 end
 
 if hud then 
@@ -17,4 +19,4 @@ end
 
 hud = hud or {} 
 
---hook.Add("InitPostEntity", "startup", init)
+hook.Add("InitPostEntity", "startup", init)

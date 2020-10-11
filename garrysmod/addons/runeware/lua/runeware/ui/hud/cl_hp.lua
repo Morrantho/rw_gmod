@@ -8,6 +8,7 @@ local drawrect=surface.DrawRect;
 local texrect=surface.DrawTexturedRect;
 local drawtext=draw.SimpleText;
 local frametime=RealFrameTime;
+local scale = font.scale;
 local clamp=math.Clamp;
 local lerp=Lerp;
 local scrw,scrh = ScrW(),ScrH();
