@@ -1,9 +1,10 @@
 if !job.enabled then return; end
 local JOB       = {};
 JOB.name        = "citizen";
-JOB.team        = JOB.name;
+JOB.team        = "civilians";
 JOB.description = "Live life to its fullest.";
 JOB.color       = color.get("green");
+JOB.limit=0;
 JOB.models      =
 {
 	"models/player/group01/female_01.mdl",

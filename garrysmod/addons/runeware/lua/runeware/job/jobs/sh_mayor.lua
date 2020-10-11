@@ -4,6 +4,7 @@ JOB.name        = "mayor";
 JOB.team        = "civil protection";
 JOB.description = "Run that city.";
 JOB.color       = color.get("red");
+JOB.limit=1;
 JOB.models      =
 {
 	"models/player/breen.mdl",

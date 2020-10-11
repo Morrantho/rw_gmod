@@ -3,7 +3,8 @@ local JOB       = {};
 JOB.name        = "chief";
 JOB.team        = "civil protection";
 JOB.description = "Coordinate cops.";
-JOB.color       = color.get("blue");
+JOB.color       = color.get("indigo");
+JOB.limit=1;
 JOB.models      =
 {
 	"models/player/barney.mdl"

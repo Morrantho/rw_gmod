@@ -11,7 +11,7 @@ panel.dbg=false;
 function panel:Init()
 	self:Dock(FILL);
 	if self.dbg then self:dodbg(); end
-	self.VBar:SetWide(ScrH()/64);
+	self.VBar:SetWide(2);
 	self.VBar.Paint=function(s,w,h) end--let these have the same bg color.
 	self.VBar:SetHideButtons(true);--noone cares about these.
 	self.VBar.btnGrip.Paint=function(s,w,h)
