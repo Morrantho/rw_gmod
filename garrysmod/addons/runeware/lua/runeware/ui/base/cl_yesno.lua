@@ -28,9 +28,6 @@ function panel:Init()
 
 	self.text=vguicreate("cl_dlabel",self.body);
 	self.text:Dock(FILL);
-	self.text.Paint=function(s,w,h)
-		s:SetFont(scale("rw",h/2.65));
-	end
 
 	self.response=vguicreate("cl_dpanel",self);
 	self.response:Dock(TOP);

@@ -9,7 +9,7 @@ local panel={};
 
 function panel:Init()
 	local scrw,scrh=ScrW(),ScrH();
-	local w,h=scrw/2,scrh/2;
+	local w,h=scrw/2,scrh/1.75;
 	self:SetSize(w,h);
 	self:Center();
 	-- self:MakePopup();
@@ -26,12 +26,10 @@ function panel:Init()
 		surface.DrawRect(0,0,w,h);
 	end
 
-	self.title=vgui.Create("cl_dbutton",self.nav);
+	self.title=vgui.Create("cl_dlabel",self.nav);
 	self.title:Dock(LEFT);
 	self.title:SetText("Runeware");
-	self.title.Paint=function(s,w,h)
-		s:SetFont(scale("rw",h));
-	end
+	self.title:SizeToContentsX(16);
 
 	self.close=vgui.Create("cl_dbutton",self.nav);
 	self.close:Dock(RIGHT);
@@ -39,7 +37,7 @@ function panel:Init()
 	self.close:SetText("x");
 	self.close.Paint=function(s,w,h)
 		if s:IsHovered() then
-			s:SetTextColor(color.get("green"));
+			s:SetTextColor(color.get("red"));
 		else
 			s:SetTextColor(color.get("whitest"));
 		end

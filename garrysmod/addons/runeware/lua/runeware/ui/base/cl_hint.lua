@@ -27,10 +27,6 @@ function panel:Init()
 
 	self.text=vguicreate("cl_dlabel",self.body);
 	self.text:Dock(FILL);
-	self.text.Paint=function(s,w,h)
-		print(h/3.65);
-		s:SetFont(scale("rw",h/3.65));
-	end
 	self:Center();
 end
 ui.add("cl_hint",panel,"cl_dframe");

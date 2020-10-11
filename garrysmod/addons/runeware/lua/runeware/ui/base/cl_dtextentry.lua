@@ -11,6 +11,7 @@ panel.dbg=true;
 
 function panel:Init()
 	self:Dock(FILL);
+	self:SetFont("rw18");
 	self:DockMargin(8,8,8,8);
 	self:SetPaintBackground(false);
 	self:SetTextColor(getcol("whitest"));

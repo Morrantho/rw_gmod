@@ -38,8 +38,8 @@ function panel:Init()
 	end
 
 	self.body=vguicreate("cl_dpanel",self);
-	self.body:Dock(TOP);
-	self.body:SetTall(bodyh);
+	self.body:Dock(FILL);
+	--self.body:SetTall(bodyh);
 	self.body.Paint=nil;
 
 	self.btnsperpage=8; -- tabs / buttons per page

@@ -9,10 +9,11 @@ local panel={};
 
 function panel:Init()
 	self:SetText("");
+	self:SetFont("rw18");
 	self:SetTextColor(getcolor("whitest"));
 	self:SetContentAlignment(5);
 end
-function panel:Paint(w,h)
-	self:SetFont(scale("rw",h));
-end
+--function panel:Paint(w,h)
+--	self:SetFont(scale("rw",h));
+--end
 ui.add("cl_dlabel",panel,"DLabel");
