@@ -19,7 +19,6 @@ function job.setjob(pl,jobname,mdl)
 	local _job=job[jobid];
 	cache.write("job","set",pl,jobid,pl);
 	pl:KillSilent();
-	pl:Spawn();
 end
 
 function job.loadout(pl)
