@@ -2,10 +2,10 @@ local function init()
     local scrw = ScrW()
     local scrh = ScrH()
 
-    hud.health = vgui.Create("cl_hp")
-    hud.health:SetPos(scrw * .02, scrh * .65)
-    hud.armor = vgui.Create("cl_armor")
-    hud.armor:SetPos(scrw * .02, scrh * .69)
+   -- hud.health = vgui.Create("cl_hp")
+   -- hud.health:SetPos(scrw * .02, scrh * .65)
+   -- hud.armor = vgui.Create("cl_armor")
+   -- hud.armor:SetPos(scrw * .02, scrh * .69)
   --  hud.beta = vgui.Create("cl_beta")
     
 end
