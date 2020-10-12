@@ -140,6 +140,10 @@ function toolrestraints.light(pl,tool,tr)
 	return true;
 end
 
+function toolrestraints.remover(pl,tool,tr)
+	return pl:isowner(tr.Entity);
+end
+
 function admin.CanTool(pl,tr,tool)
 	if admin.bannedtools[tool] then return false; end
 	if toolrestraints[tool] then

@@ -17,9 +17,9 @@ function CMD.run(ply,args,argstr)
     end
     table.insert( trgs, ply)
 
-    if ply:getrole() < 3 then
-        cache.put(ply,"quickreply",60)
-    end
+    -- if ply:getrole() < 3 then
+    --     cache.put(ply,"quickreply",60)
+    -- end
 
     net.Start("chat.admin")
         net.WriteUInt(ply:UserID(), 7)

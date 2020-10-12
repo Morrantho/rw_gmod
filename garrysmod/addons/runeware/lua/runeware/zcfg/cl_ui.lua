@@ -17,5 +17,6 @@ ui.disabled   =
 -- these point to commands and run them when binds are hit.
 ui.binds =
 {
-	gm_showspare1 = "rw_cursor"
+	gm_showspare1="rw_cursor",
+	gm_showspare2="cl_f4"
 };

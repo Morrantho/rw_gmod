@@ -6,6 +6,7 @@ JOB.name        = "cop";
 JOB.team        = "civil protection";
 JOB.description = "Arrest baddies.";
 JOB.color       = color.get("blue");
+JOB.limit=0;
 JOB.models      =
 {
 	"models/player/police.mdl",

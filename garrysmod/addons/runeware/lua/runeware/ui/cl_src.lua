@@ -19,8 +19,10 @@ hookadd("HUDShouldDraw","ui.HUDShouldDraw",ui.HUDShouldDraw);
 
 function ui.PlayerBindPress(pl,bnd,prs)
 	if !ui.binds[bnd] then return false; end
-	pl:ConCommand(ui.binds[bnd]);
-	return true;
+	if prs then
+		pl:ConCommand(ui.binds[bnd]);
+		return true;
+	end
 end
 hookadd("PlayerBindPress","ui.PlayerBindPress",ui.PlayerBindPress);
 

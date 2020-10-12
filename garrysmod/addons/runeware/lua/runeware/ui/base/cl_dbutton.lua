@@ -9,6 +9,7 @@ local panel = {};
 
 function panel:Init()
 	self:SetText("");
+	self:SetFont("rw18");
 	self:SetTextColor(getcol("whitest"));
 	self:Center();
 	self:SetTall(ScrH()/32);
@@ -32,6 +33,6 @@ function panel:Paint(w,h)
 	rect(0,0,w,h);
 	setcol(getcol("blacker"));
 	olrect(0,0,w,h);
-	self:SetFont(scale("rw",h));
+	--self:SetFont(scale("rw",h));
 end
 ui.add("cl_dbutton",panel,"DButton");
