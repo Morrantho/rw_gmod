@@ -23,7 +23,7 @@ function admin.PlayerSpawnedProp(pl,mdl,ent)
 end
 hookadd("PlayerSpawnedProp","admin.PlayerSpawnedProp",admin.PlayerSpawnedProp);
 
-function admin.PlayerSpawnEffect(pl,mdl)
+function admin.PlayerSpawnEffect(pl)
 	if !pl:IsSuperAdmin() then err( "You can not spawn effects on the server", pl ) return false end
 	return true;
 end
@@ -35,13 +35,13 @@ function admin.PlayerSpawnedEffect(pl,mdl,ent)
 end
 hookadd("PlayerSpawnedEffect","admin.PlayerSpawnedEffect",admin.PlayerSpawnedEffect);
 
-function admin.PlayerSpawnNPC(pl,npctype,wep)
+function admin.PlayerSpawnNPC(pl)
 	if !pl:IsSuperAdmin() then err( "You can not spawn NPCs on the server.", pl ) return false end
 	return true;
 end
 hookadd("PlayerSpawnNPC","admin.PlayerSpawnNPC",admin.PlayerSpawnNPC);
 
-function admin.PlayerSpawnedNPC(pl,ent) end
+function admin.PlayerSpawnedNPC() end
 hookadd("PlayerSpawnedNPC","admin.PlayerSpawnedNPC",admin.PlayerSpawnedNPC);
 
 function admin.PlayerSpawnRagdoll(pl,mdl)
@@ -50,7 +50,7 @@ function admin.PlayerSpawnRagdoll(pl,mdl)
 end
 hookadd("PlayerSpawnRagdoll","admin.PlayerSpawnRagdoll",admin.PlayerSpawnRagdoll);
 
-function admin.PlayerSpawnedRagdoll(pl,mdl,ent) end
+function admin.PlayerSpawnedRagdoll() end
 hookadd("PlayerSpawnedRagdoll","admin.PlayerSpawnedRagdoll",admin.PlayerSpawnedRagdoll);
 
 function admin.PlayerSpawnSENT(pl)
@@ -73,7 +73,7 @@ hookadd("PlayerSpawnSWEP","admin.PlayerSpawnSWEP",admin.PlayerSpawnSWEP);
 function admin.PlayerSpawnedSWEP() end
 hookadd("PlayerSpawnedSWEP","admin.PlayerSpawnedSWEP",admin.PlayerSpawnedSWEP);
 
-function admin.PlayerSpawnVehicle()
+function admin.PlayerSpawnVehicle(pl)
 	if !pl:IsSuperAdmin() then err( "You can not spawn vehicles on the server.", pl ) return false end
 	return true;
 end
@@ -81,3 +81,9 @@ hookadd("PlayerSpawnVehicle","admin.PlayerSpawnVehicle",admin.PlayerSpawnVehicle
 
 function admin.PlayerSpawnedVehicle() end
 hookadd("PlayerSpawnedVehicle","admin.PlayerSpawnedVehicle",admin.PlayerSpawnedVehicle);
+
+function admin.PlayerGiveSWEP(pl)
+	if !pl:IsSuperAdmin() then err( "You can not give yourself weapons.", pl ) return false end
+	return true
+end
+hookadd("PlayerGiveSWEP","admin.PlayerGiveSWEP",admin.PlayerGiveSWEP)
