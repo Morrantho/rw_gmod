@@ -24,8 +24,8 @@ end
 hookadd("PlayerSpawnedProp","admin.PlayerSpawnedProp",admin.PlayerSpawnedProp);
 
 function admin.PlayerSpawnEffect(pl,mdl)
-	err( "You can not spawn effects on the server", pl )
-	return false;
+	if !pl:IsSuperAdmin() then err( "You can not spawn effects on the server", pl ) return false end
+	return true;
 end
 hookadd("PlayerSpawnEffect","admin.PlayerSpawnEffect",admin.PlayerSpawnEffect);
 
@@ -36,30 +36,26 @@ end
 hookadd("PlayerSpawnedEffect","admin.PlayerSpawnedEffect",admin.PlayerSpawnedEffect);
 
 function admin.PlayerSpawnNPC(pl,npctype,wep)
-	err( "You can not spawn NPCs on the server.", pl )
-	return false;
+	if !pl:IsSuperAdmin() then err( "You can not spawn NPCs on the server.", pl ) return false end
+	return true;
 end
 hookadd("PlayerSpawnNPC","admin.PlayerSpawnNPC",admin.PlayerSpawnNPC);
 
-function admin.PlayerSpawnedNPC(pl,ent)
-
-end
+function admin.PlayerSpawnedNPC(pl,ent) end
 hookadd("PlayerSpawnedNPC","admin.PlayerSpawnedNPC",admin.PlayerSpawnedNPC);
 
 function admin.PlayerSpawnRagdoll(pl,mdl)
-	err( "You can not spawn ragdolls on the server.", pl )
-	return false;
+	if !pl:IsSuperAdmin() then err( "You can not spawn ragdolls on the server.", pl ) return false end
+	return true;
 end
 hookadd("PlayerSpawnRagdoll","admin.PlayerSpawnRagdoll",admin.PlayerSpawnRagdoll);
 
-function admin.PlayerSpawnedRagdoll(pl,mdl,ent)
-
-end
+function admin.PlayerSpawnedRagdoll(pl,mdl,ent) end
 hookadd("PlayerSpawnedRagdoll","admin.PlayerSpawnedRagdoll",admin.PlayerSpawnedRagdoll);
 
 function admin.PlayerSpawnSENT(pl)
-	err( "You can not spawn entities on the server.", pl )
-	return false;
+	if !pl:IsSuperAdmin() then err( "You can not spawn entities on the server.", pl ) return false end
+	return true;
 end
 hookadd("PlayerSpawnSENT","admin.PlayerSpawnSENT",admin.PlayerSpawnSENT);
 
@@ -68,24 +64,20 @@ function admin.PlayerSpawnedSENT()
 end
 hookadd("PlayerSpawnedSENT","admin.PlayerSpawnedSENT",admin.PlayerSpawnedSENT);
 
-function admin.PlayerSpawnSWEP()
-	err( "You can not spawn weapons on the server.", pl )
-	return false;
+function admin.PlayerSpawnSWEP(pl)
+	if !pl:IsSuperAdmin() then err( "You can not spawn weapons on the server.", pl ) return false end
+	return true;
 end
 hookadd("PlayerSpawnSWEP","admin.PlayerSpawnSWEP",admin.PlayerSpawnSWEP);
 
-function admin.PlayerSpawnedSWEP()
-
-end
+function admin.PlayerSpawnedSWEP() end
 hookadd("PlayerSpawnedSWEP","admin.PlayerSpawnedSWEP",admin.PlayerSpawnedSWEP);
 
 function admin.PlayerSpawnVehicle()
-	err( "You can not spawn vehicles on the server.", pl )
-	return false;
+	if !pl:IsSuperAdmin() then err( "You can not spawn vehicles on the server.", pl ) return false end
+	return true;
 end
 hookadd("PlayerSpawnVehicle","admin.PlayerSpawnVehicle",admin.PlayerSpawnVehicle);
 
-function admin.PlayerSpawnedVehicle()
-
-end
+function admin.PlayerSpawnedVehicle() end
 hookadd("PlayerSpawnedVehicle","admin.PlayerSpawnedVehicle",admin.PlayerSpawnedVehicle);

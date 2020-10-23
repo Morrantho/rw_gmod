@@ -13,6 +13,13 @@ function rwplayer.initpostentity()
 end
 hookadd("InitPostEntity","rwplayer.initpostentity",rwplayer.initpostentity);
 
+function rwplayer.uisound()
+	local sndstr = net.ReadString()
+	if !sndstr || sndstr == "" || !file.Exists( "sound/" .. sndstr, "GAME") then return end
+	surface.PlaySound( sndstr )
+end
+net.Receive("rwplayer.uisound", rwplayer.uisound)
+
 cache.register({
 	name="money",
 	set=function(varid,ent,cached)

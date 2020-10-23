@@ -41,3 +41,8 @@ function pl:withinbounds( ent, dist )
 	if !ent then return false end
 	return self:GetPos():DistToSqr( ent:GetPos() ) < ( dist * dist )
 end
+
+function pl:withinvector( vec, dist )
+	if !vec then return false end
+	return self:GetPos():DistToSqr( vec ) < ( dist * dist )
+end

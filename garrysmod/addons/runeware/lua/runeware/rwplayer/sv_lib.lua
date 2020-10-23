@@ -9,7 +9,7 @@ local vec=Vector;
 local pl=FindMetaTable("Entity");
 local player=player;
 
---[[ Hooks --]]
+--[[ Hooks ]]--
 
 function rwplayer.loadplayer(data,pl)
 	rwplayer.onsetname(nil,{pl,data.name});
@@ -49,7 +49,7 @@ function rwplayer.playerdisconnected(pl)
 	if pl:spectating() then pl:unspecplayer() end
 	if pl.Speccers then
 		for ply, _ in pairs( pl.Speccers ) do
-			if IsValid(ply) then 
+			if IsValid(ply) then
 				ply:unspecplayer()
 			else
 				ply = nil
@@ -67,7 +67,7 @@ function rwplayer.playersetmodel(pl)
 end
 hookadd("PlayerSetModel","rwplayer.playersetmodel",rwplayer.playersetmodel);
 
---[[ RP Names --]]
+--[[ RP Names ]]--
 
 function rwplayer.onsetname(data,args)
 	local pl      = args[1];
@@ -100,7 +100,7 @@ function rwplayer.onclientinit( len, pl )
 end
 net.Receive("rwplayer.onclientinit", rwplayer.onclientinit)
 
---[[ Money --]] 
+--[[ Money ]]-- 
 
 function rwplayer.onsetmoney(data,args)
 	local pl    = args[1];
@@ -122,7 +122,7 @@ function rwplayer.setusermode(pl,mode)
 	cache.write("usermode","set",pl,mode,plyall());
 end
 
---[[ Demotes --]] 
+--[[ Demotes ]]-- 
 
 function rwplayer.demote(by,tgt,rsn)
 	if #rsn < 1 || #rsn > 32 then
@@ -140,7 +140,21 @@ function rwplayer.demote(by,tgt,rsn)
 	success(fmt);
 end
 
---[[ Metas --]] 
+--[[ Networked UI Sound ]]--
+
+util.AddNetworkString("rwplayer.uisound")
+function rwplayer.uisound(pl,snd)
+	if !pl || !IsValid(pl) || !snd || snd == "" then return end
+	net.Start("rwplayer.uisound")
+		net.WriteString(snd)
+	net.Send( pl )
+end
+
+--[[ Metas ]]--
+
+function pl:uisound(snd)
+	rwplayer.uisound(self,snd)
+end
 
 function pl:setusermode(mode)
 	rwplayer.setusermode(self,mode);
@@ -232,7 +246,7 @@ function pl:unspecplayer()
 	self.Spec = nil
 end
 
---[[ Player Lib Extensions --]]
+--[[ Player Lib Extensions ]]--
 
 function player.omit(t)
 	local all=plyall();
@@ -244,7 +258,7 @@ function player.omit(t)
 	return res;
 end
 
---[[ Netvars --]] 
+--[[ Netvars ]]-- 
 
 cache.register({
 	name="money",

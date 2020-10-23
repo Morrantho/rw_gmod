@@ -16,7 +16,9 @@ function CMD.run(pl,args,argstr)
         "green", "Ent Index: ",
         "yellow", ( ent:EntIndex() || "NO INDEX( HOW? )" ) .. "\n",
         "green", "Ent Model: ",
-        "yellow", ent:GetModel() || "NONE"
+        "yellow", ent:GetModel() .. "\n" || "NONE" .. "\n",
+        "green", "Ent Pos: ",
+        "yellow", math.Round( ent:GetPos().x ) .. ", " .. math.Round( ent:GetPos().y ) .. ", " .. math.Round( ent:GetPos().z )
     }
     pmsg( pl, tbl )
 end

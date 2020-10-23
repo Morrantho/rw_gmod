@@ -34,7 +34,17 @@ local function crosshair()
 	drawrect(x,y,w,h);
 end
 
+local crosswpn =
+{
+	["hands"] = true,
+	["weapon_physgun"] = true,
+	["weapon_hands"] = true,
+	["gmod_tool"] = true
+}
+
 local function paint()
-	crosshair();
+	if LocalPlayer():Alive() && IsValid( LocalPlayer():GetActiveWeapon() ) && crosswpn[ LocalPlayer():GetActiveWeapon():GetClass() ] then 
+		crosshair()
+	end
 end
 hookadd("HUDPaint","paint",paint);
